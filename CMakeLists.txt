@@ -11,24 +11,16 @@ set(APP_VERSION_MINOR 0)
 set(PROJECT_NAME simulator.app)
 
 # raylib
-find_package(raylib 4.0.0 QUIET CONFIG)
+find_package(raylib QUIET)
 if (NOT raylib_FOUND)
     include(FetchContent)
     FetchContent_Declare(
         raylib
         GIT_REPOSITORY https://github.com/raysan5/raylib.git
-        GIT_TAG GIT_TAG 4.0.0
+        GIT_TAG 4.0.0
     )
-    FetchContent_GetProperties(raylib)
-    if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
-        set(FETCHCONTENT_QUIET NO)
-        FetchContent_Populate(raylib)
-        set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
-        set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
-        add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
-    endif()
+    FetchContent_MakeAvailable(raylib)
 endif()
-
 
 # raylib-cpp
 find_package(raylib_cpp QUIET)
@@ -42,25 +34,47 @@ if (NOT raylib_cpp_FOUND)
     FetchContent_MakeAvailable(raylib_cpp)
 endif()
 
+# GLM
+find_package(glm REQUIRED)
+if (NOT glm_FOUND)
+    include(FetchContent)
+    FetchContent_Declare(
+        glm
+        GIT_REPOSITORY https://github.com/g-truc/glm.git
+        GIT_TAG "GLM 0.9.9.9.8"
+    )
+    FetchContent_MakeAvailable(raylib_cpp)
+endif()
+
 # imgui
-add_subdirectory(vendor/imgui_glfw_opengl3_impl)
+add_subdirectory(include/imgui_glfw_opengl3_impl)
 
 # Project sources
-set(SOURCES main.cpp)
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}") # Sets include paths
+set(SOURCES main.cpp
+    src/application/Application.h src/application/Application.cpp
+
+    src/sim/Robot.h src/sim/Robot.cpp
+    src/sim/Simulator.h src/sim/Simulator.cpp
+
+    src/ui/PropertyPanel.h src/ui/PropertyPanel.cpp
+    src/ui/SimulatorView.h src/ui/SimulatorView.cpp
+    )
+
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 # libs
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME} PUBLIC
         raylib
         raylib_cpp
         imgui
         )
 
-target_link_libraries(${PROJECT_NAME} imgui)
+# set(PLATORM "DESKTOP")
 
-# Web Configurations TODO make this work!
-if (${PLATFORM} STREQUAL "Web")
-    # Tell Emscripten to build an example.html file.
-    set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
-endif()
+# # Web Configurations TODO make this work!
+# if (${PLATFORM} STREQUAL "Web")
+#     # Tell Emscripten to build an example.html file.
+#     set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
+# endif()

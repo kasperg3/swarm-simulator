@@ -25,3 +25,10 @@ emmake make
 ```
 ./raylib-cpp-example
 ```
+
+
+## Install dependencies
+
+Opengl:
+
+sudo apt install libglm-dev

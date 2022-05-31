@@ -5,7 +5,7 @@ class PropertyPanel {
    public:
     PropertyPanel();
 
-    void render();
+    void draw();
 
    private:
 };
