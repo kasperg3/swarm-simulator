@@ -4,16 +4,21 @@
 #include <iostream>
 #include <string>
 
+#include "src/core/Log.h"
 Application::Application() {
     Application(false);
 }
 
 Application::Application(bool headless) : mHeadless(headless) {
-    // TODO create simulator here and pass to simulator view
+    // init logger
+    Log log;
+    log.Init();
+
+    // init simulation
     mSimulator = std::make_shared<Simulator>();
 
     if (!mHeadless) {
-        // simulator view
+        // init the view
         mSimulatorView = std::make_unique<SimulatorView>(mSimulator, 1000, 720);
     }
 }
@@ -22,7 +27,6 @@ Application::~Application() {
 }
 
 bool Application::shouldClose() {
-    // Todo how should the headless version close?
     return mHeadless ? false : WindowShouldClose();
 }
 

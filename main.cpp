@@ -3,7 +3,7 @@
 //#include "raygui.h"
 #include "src/application/Application.h"
 int main(void) {
-    Application application(true);
+    Application application(false);
     application.loop();
 
     return 0;

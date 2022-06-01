@@ -1,6 +1,10 @@
 # raylib-cpp CMake Example Project
 
-Use this template to build a [raylib-cpp](https://github.com/RobLoach/raylib-cpp) project using CMake.
+## Install dependencies
+
+Opengl:
+
+sudo apt install libglm-dev
 
 ## Build
 
@@ -20,15 +24,3 @@ emcmake cmake .. -DPLATFORM=Web -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FL
 emmake make
 ```
 
-## Run
-
-```
-./raylib-cpp-example
-```
-
-
-## Install dependencies
-
-Opengl:
-
-sudo apt install libglm-dev

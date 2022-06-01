@@ -1,19 +1,22 @@
 #include "Simulator.h"
 
 Simulator::Simulator() {
-    mState = {{Robot(), Robot()}};
+    std::list<Robot> robots;
+    for (size_t i = 0; i < 100; i++) {
+        robots.emplace_back(Robot(i));
+    }
+
+    mState = SimulatorState(robots);
 }
 
-Simulator::Simulator(SimulatorState state) : mState(state) {
-}
-
-Simulator::~Simulator() {
-}
+Simulator::~Simulator() {}
 
 void Simulator::step() {
     // act once with every agent
-    for (auto robot : this->mState.robots) {
-        robot.update();
+    // Todo create a getter in SimulatorState to get the robot iterator
+    for (std::list<Robot>::iterator it = mState.mRobots.begin(); it != mState.mRobots.end(); ++it) {
+        it->sense(mState);
+        it->act();
     }
 }
 
@@ -24,5 +27,6 @@ void Simulator::step(int steps) {
 }
 
 SimulatorState Simulator::getState() {
+    // TODO make simulator return a pointer to a const state
     return mState;
 }

@@ -6,16 +6,11 @@
 #include <list>
 
 #include "Robot.h"
-
-struct SimulatorState {
-    std::list<Robot> robots;
-    // Todo add more states, like environment states
-};
+#include "SimulatorState.h"
 
 class Simulator {
    public:
     Simulator();
-    Simulator(SimulatorState);
     ~Simulator();
     SimulatorState getState();
     void step();

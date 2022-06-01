@@ -80,18 +80,17 @@ void SimulatorView::drawUI() {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
+#include "src/core/Log.h"
+
 void SimulatorView::drawSimulationView() {
     BeginMode3D(mCamera);
     DrawGrid(50, 1.0f);
-
-    // TODO Draw robots in sim state
-    for (auto &&r : mSimulator->getState().robots) {
+    for (auto &&r : mSimulator->getState().mRobots) {
         auto pos = r.getPosition();
-        std::cout << pos.x << std::endl;
         Vector3 rlPos = {(float)pos.x, (float)pos.y, (float)pos.z};
         DrawCube(rlPos, 0.5f, .5f, .5f, RED);
         DrawCubeWires(rlPos, 0.5f, 0.5f, 0.5f, MAROON);
-        DrawCircle3D(rlPos, 1, {1, 0, 0}, -90, BLUE);
+        DrawCircle3D(rlPos, r.getAttributes().radiusToNeighbour, {1, 0, 0}, -90, BLUE);
     }
 
     EndMode3D();
