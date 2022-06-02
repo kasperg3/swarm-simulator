@@ -88,7 +88,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         # raylib_cpp
         imgui
         spdlog::spdlog
-        glm
         )
 
 
