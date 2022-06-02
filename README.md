@@ -2,12 +2,10 @@
 
 TODO: add images
 ## Install dependencies
-
-Opengl:
+Install the dependencies:
 ```
-sudo apt install libglm-dev
+sudo apt update && sudo apt install build-essential libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev libglm-dev libglfw3-dev
 ```
-TODO: list the remaining dependencies
 
 ## Build
 
@@ -18,12 +16,24 @@ cmake ..
 make
 ```
 
-### Web
+## Web Build
+Alternatively to the normal cmake, a web assembly version can be compiled. 
+
+### Install dependensies
+Follow the guide to install emscripten:
+https://emscripten.org/docs/getting_started/downloads.html
+
+make sure to source the emcsdk before use:
+```
+source ~/emsdk/emsdk_env.sh
+```
+
+### Build
 
 ```
 mkdir build
 cd build
-emcmake cmake .. -DPLATFORM=Web -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-s USE_GLFW=3"
+emcmake cmake .. -DPLATFORM=Web -DCMAKE_BUILD_TYPE=Release
 emmake make
 ```
 

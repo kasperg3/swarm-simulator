@@ -75,12 +75,9 @@ void Robot::sense(SimulatorState* state) {
         separation = -separation;
     }
 
-    // TODO create a bounding sphere (this only works when the sphere is at 0.0)
+    // this only works when the sphere is at 0.0
     // Repel = P0 - ((C + V) / |V|) * R
-    glm::dvec3 repellant = glm::dvec3(0.0, 0.0, 0.0);
-    if (std::abs(glm::length(getPosition())) > BOUNDING_RADIUS) {
-        repellant = -getPosition();
-    }
+    glm::dvec3 repellant = std::abs(glm::length(getPosition())) > BOUNDING_RADIUS ? -getPosition() : glm::dvec3(0.0, 0.0, 0.0);
 
     glm::dvec3 attractor = glm::dvec3(mAttributes.taget - getPosition());
 

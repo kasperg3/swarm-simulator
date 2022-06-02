@@ -1,14 +1,14 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.22)
 project(swarm-sim)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_C_STANDARD 20)
+set(CMAKE_C_STANDARD 17)
 
 set(CMAKE_VERBOSE_MAKEFILE 1)
 set(APP_VERSION_MAJOR 1)
 set(APP_VERSION_MINOR 0)
 
-set(PROJECT_NAME simulator.app)
+set(PROJECT_NAME simulator)
 
 # raylib
 find_package(raylib QUIET)
@@ -22,20 +22,20 @@ if (NOT raylib_FOUND)
     FetchContent_MakeAvailable(raylib)
 endif()
 
-# raylib-cpp
-find_package(raylib_cpp QUIET)
-if (NOT raylib_cpp_FOUND)
-    include(FetchContent)
-    FetchContent_Declare(
-        raylib_cpp
-        GIT_REPOSITORY https://github.com/RobLoach/raylib-cpp.git
-        GIT_TAG v4.2.1
-    )
-    FetchContent_MakeAvailable(raylib_cpp)
-endif()
+# # raylib-cpp
+# find_package(raylib_cpp QUIET)
+# if (NOT raylib_cpp_FOUND)
+#     include(FetchContent)
+#     FetchContent_Declare(
+#         raylib_cpp
+#         GIT_REPOSITORY https://github.com/RobLoach/raylib-cpp.git
+#         GIT_TAG v4.2.1
+#     )
+#     FetchContent_MakeAvailable(raylib_cpp)
+# endif()
 
 # GLM
-find_package(glm REQUIRED)
+find_package(glm QUIET)
 if (NOT glm_FOUND)
     include(FetchContent)
     FetchContent_Declare(
@@ -85,15 +85,18 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 target_link_libraries(${PROJECT_NAME} PUBLIC
         raylib
-        raylib_cpp
+        # raylib_cpp
         imgui
         spdlog::spdlog
+        glm
         )
 
-# set(PLATORM "DESKTOP")
 
-# # Web Configurations TODO make this work!
-# if (${PLATFORM} STREQUAL "Web")
-#     # Tell Emscripten to build an example.html file.
-#     set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
-# endif()
+# Web Configurations 
+if( NOT DEFINED ${PLATFORM})
+    set(PLATFORM "DESKTOP")
+endif()
+
+if (${PLATFORM} STREQUAL "Web")
+    set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
+endif()
