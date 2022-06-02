@@ -4,12 +4,15 @@
 #include "include/imgui_glfw_opengl3_impl/imgui_impl_glfw.h"
 #include "include/imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
 
-PropertyPanel::PropertyPanel() {
+PropertyPanel::PropertyPanel() : mRestart(false) {
 }
 
-void PropertyPanel::draw() {
+void PropertyPanel::draw(SimulatorState* state) {
     // Settings menu
     ImGui::Begin("Settings");
+    if (ImGui::Button("Restart")) {
+        setRestart(true);
+    }
     ImGui::DragFloat("Cohesion", &mCohesion);
     ImGui::DragFloat("Seperation", &mSeparation);
     ImGui::DragFloat("Allignment", &mAllignment);

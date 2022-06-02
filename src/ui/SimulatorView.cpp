@@ -57,6 +57,10 @@ void SimulatorView::render() {
 
 void SimulatorView::update() {
     UpdateCamera(&mCamera);  // Update camera
+    if (mPropertyPanel.getRestart()) {
+        mSimulator->restart();
+        mPropertyPanel.setRestart(false);
+    }
 
     // if (IsKeyDown(KEY_RIGHT)) cubePosition.x -= .1f;
     // if (IsKeyDown(KEY_LEFT)) cubePosition.x += .1f;
@@ -74,7 +78,7 @@ void SimulatorView::drawUI() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-    mPropertyPanel.draw();
+    mPropertyPanel.draw(mSimulator->getState());
     rlDrawRenderBatchActive();
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -85,12 +89,12 @@ void SimulatorView::drawUI() {
 void SimulatorView::drawSimulationView() {
     BeginMode3D(mCamera);
     DrawGrid(50, 1.0f);
-    for (auto &&r : mSimulator->getState().mRobots) {
+    for (auto &&r : mSimulator->getState()->mRobots) {
         auto pos = r.getPosition();
         Vector3 rlPos = {(float)pos.x, (float)pos.y, (float)pos.z};
         DrawCube(rlPos, 0.5f, .5f, .5f, RED);
         DrawCubeWires(rlPos, 0.5f, 0.5f, 0.5f, MAROON);
-        DrawCircle3D(rlPos, r.getAttributes().radiusToNeighbour, {1, 0, 0}, -90, BLUE);
+        // DrawCircle3D(rlPos, r.getAttributes().radiusToNeighbour, {1, 0, 0}, -90, LIGHTGRAY);
     }
 
     EndMode3D();

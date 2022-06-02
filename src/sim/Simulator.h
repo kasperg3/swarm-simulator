@@ -4,6 +4,7 @@
 #pragma once
 
 #include <list>
+#include <memory>
 
 #include "Robot.h"
 #include "SimulatorState.h"
@@ -12,12 +13,14 @@ class Simulator {
    public:
     Simulator();
     ~Simulator();
-    SimulatorState getState();
     void step();
     void step(int);
+    void restart();
+
+    SimulatorState* getState();
 
    private:
-    SimulatorState mState;
+    std::shared_ptr<SimulatorState> mState;
 };
 
 #endif

@@ -11,12 +11,13 @@
 
 Robot::Robot(int id) : mId(id) {
     mAttributes = {
-        0.5,
-        0.3,
-        0.2,
-        0.0,
-        5,
-        glm::dvec3(0.0, 0.0, 0.0),
+        // TODO move non robot attributes into simulatorstate
+        0.5,                           // cohesion
+        0.3,                           // separation
+        0.2,                           // allignment
+        0.0,                           // attractor
+        5,                             // neighbourhood
+        glm::dvec3(20.0, 20.0, 20.0),  // Attractor target
         glm::dvec3((rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0),
         glm::dvec3((rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0),
     };
@@ -46,19 +47,19 @@ glm::dvec3 Robot::clampMagnitude(glm::dvec3 vector) {
     return glm::normalize(vector) * std::min(glm::length(vector), MAX_SPEED);
 }
 
-void Robot::sense(const SimulatorState& state) {
+void Robot::sense(SimulatorState* state) {
     glm::dvec3 allignment(0.0, 0.0, 0.0);
     glm::dvec3 flockCenter(0.0, 0.0, 0.0);
     glm::dvec3 separation(0.0, 0.0, 0.0);
     glm::dvec3 cohesion(0.0, 0.0, 0.0);
     int neighbourCount = 0;
 
-    for (auto&& robot : state.mRobots) {
+    for (auto&& robot : state->mRobots) {
         if (isNeighbouring(robot)) {
             neighbourCount++;
             allignment += robot.mAttributes.velocity;
             flockCenter += robot.mAttributes.position;
-            separation += getPosition() - robot.mAttributes.position;
+            separation += robot.mAttributes.position - getPosition();
         }
     }
 
@@ -71,7 +72,7 @@ void Robot::sense(const SimulatorState& state) {
         cohesion = flockCenter - getPosition();
 
         // Separation
-        // separation = -separation;
+        separation = -separation;
     }
 
     // TODO create a bounding sphere (this only works when the sphere is at 0.0)
@@ -103,7 +104,8 @@ void Robot::sense(const SimulatorState& state) {
 }
 
 bool Robot::isNeighbouring(Robot robot) {
-    return glm::length(this->getPosition() - robot.getPosition()) < this->mAttributes.radiusToNeighbour;
+    // if the robot is not itself and is within radius
+    return glm::notEqual(getPosition(), robot.getPosition()).b && glm::length(this->getPosition() - robot.getPosition()) < this->mAttributes.radiusToNeighbour;
 }
 
 void Robot::act() {

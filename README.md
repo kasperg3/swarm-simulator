@@ -1,10 +1,13 @@
-# raylib-cpp CMake Example Project
+# HERD - Human-AI Collaboration: Swarm Sim
 
+TODO: add images
 ## Install dependencies
 
 Opengl:
-
+```
 sudo apt install libglm-dev
+```
+TODO: list the remaining dependencies
 
 ## Build
 

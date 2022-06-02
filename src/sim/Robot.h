@@ -5,8 +5,9 @@
 
 class SimulatorState;  // Forward declaration to avoid circular includes
 
-#include "glm/glm.hpp"
+#include <memory>
 
+#include "glm/glm.hpp"
 // TODO the attributes should be all the static configs, others should be contained in robot
 struct RobotAttributes {
     float cohesion;
@@ -25,7 +26,7 @@ class Robot {
     glm::dvec3 getPosition();
     glm::dvec3 getVelocity();
     RobotAttributes getAttributes();
-    void sense(const SimulatorState&);
+    void sense(SimulatorState*);
     void act();
     ~Robot();
 
