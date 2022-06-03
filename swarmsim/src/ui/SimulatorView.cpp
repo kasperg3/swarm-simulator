@@ -6,9 +6,9 @@
 #include <string>
 
 #include "GLFW/glfw3.h"  // Note: Provided with Raylib but needs to be in GLFW folder to work correctly
-#include "include/imgui_glfw_opengl3_impl/imgui.h"
-#include "include/imgui_glfw_opengl3_impl/imgui_impl_glfw.h"
-#include "include/imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
+#include "external/imgui_glfw_opengl3_impl/imgui.h"
+#include "external/imgui_glfw_opengl3_impl/imgui_impl_glfw.h"
+#include "external/imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
 #include "rlgl.h"
 
 SimulatorView::SimulatorView(std::shared_ptr<Simulator> simPtr, int width, int height) : mScreenHeight(height), mScreenWidth(width), mSimulator(simPtr) {
@@ -83,8 +83,6 @@ void SimulatorView::drawUI() {
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
-
-#include "src/core/Log.h"
 
 void SimulatorView::drawSimulationView() {
     BeginMode3D(mCamera);

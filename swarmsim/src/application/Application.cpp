@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#include "src/core/Log.h"
+#include "include/Log.h"
 Application::Application() {
     Application(false);
 }

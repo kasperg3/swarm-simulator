@@ -10,10 +10,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}",
-                "${workspaceFolder}/src/**",
-                "${workspaceFolder}/include/imgui_glfw_opengl3_impl/",
-                "${workspaceFolder}/build/_deps/raylib-src/src/",
-                "${workspaceFolder}/build/_deps/spdlog-src/include"
+                "${workspaceFolder}/swarmsim/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

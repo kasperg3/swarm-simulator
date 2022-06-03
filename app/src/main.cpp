@@ -1,5 +1,5 @@
 
-#include "src/application/Application.h"
+#include "Application.h"
 int main(void) {
     Application application(false);
     application.loop();
