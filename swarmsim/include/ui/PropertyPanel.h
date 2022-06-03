@@ -2,7 +2,7 @@
 #define __PROPERTYPANEL_H__
 #include <memory>
 
-#include "Simulator.h"
+#include "../sim/Simulator.h"
 class PropertyPanel {
    public:
     PropertyPanel();

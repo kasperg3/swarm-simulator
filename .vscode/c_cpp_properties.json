@@ -10,7 +10,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}",
-                "${workspaceFolder}/swarmsim/include"
+                "${workspaceFolder}/swarmsim/include/application"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

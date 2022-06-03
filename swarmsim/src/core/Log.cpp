@@ -2,7 +2,7 @@
 // Created by kasper on 10/16/19.
 //
 
-#include "Log.h"
+#include "core/Log.h"
 
 #include "spdlog/sinks/stdout_color_sinks.h"
 

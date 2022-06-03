@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 
-#include "include/Log.h"
 Application::Application() {
     Application(false);
 }

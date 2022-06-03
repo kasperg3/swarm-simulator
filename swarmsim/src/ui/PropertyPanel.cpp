@@ -1,8 +1,8 @@
-#include "PropertyPanel.h"
+#include "ui/PropertyPanel.h"
 
-#include "external/imgui_glfw_opengl3_impl/imgui.h"
-#include "external/imgui_glfw_opengl3_impl/imgui_impl_glfw.h"
-#include "external/imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
+#include "imgui_glfw_opengl3_impl/imgui.h"
+#include "imgui_glfw_opengl3_impl/imgui_impl_glfw.h"
+#include "imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
 
 PropertyPanel::PropertyPanel() : mRestart(false) {
 }

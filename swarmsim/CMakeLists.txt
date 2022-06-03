@@ -51,7 +51,7 @@ add_subdirectory(external/imgui_glfw_opengl3_impl)
 # Create a shared library
 add_library(${PROJECT_NAME} OBJECT)
 
-target_sources(${PROJECT_NAME}
+target_sources(${PROJECT_NAME} 
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/application/Application.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Log.cpp
@@ -63,9 +63,10 @@ target_sources(${PROJECT_NAME}
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/application/        # TODO make sure to only expose files that are intended for the user 
     PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/
+    ${CMAKE_CURRENT_SOURCE_DIR}/external
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
     )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_constexpr)

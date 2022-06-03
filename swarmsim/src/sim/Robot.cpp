@@ -1,12 +1,12 @@
-#include "Robot.h"
+#include "sim/Robot.h"
 
 #include <math.h>
 
 #include <cstdlib>
 #include <iostream>
 
-#include "SimulatorState.h"
 #include "glm/glm.hpp"
+#include "sim/SimulatorState.h"
 #include "time.h"
 
 Robot::Robot(int id) : mId(id) {

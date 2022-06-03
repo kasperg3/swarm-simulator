@@ -5,8 +5,9 @@
 #include <memory>
 #include <string>
 
-#include "Simulator.h"
-#include "SimulatorView.h"
+#include "../core/Log.h"
+#include "../sim/Simulator.h"
+#include "../ui/SimulatorView.h"
 
 class Application {
    public:

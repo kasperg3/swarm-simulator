@@ -1,6 +1,6 @@
-#include "include/Simulator.h"
+#include "sim/Simulator.h"
 
-#include "include/Log.h"
+#include "core/Log.h"
 Simulator::Simulator() {
     std::list<Robot> robots;
     for (size_t i = 0; i < 100; i++) {

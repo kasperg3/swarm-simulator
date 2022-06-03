@@ -5,8 +5,8 @@
 #include <list>
 #include <memory>
 
+#include "../sim/Simulator.h"
 #include "PropertyPanel.h"
-#include "Simulator.h"
 #include "raylib.h"
 
 class SimulatorView {

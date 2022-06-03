@@ -1,4 +1,4 @@
-#include "SimulatorView.h"
+#include "ui/SimulatorView.h"
 
 #include "raylib.h"
 #define GRAPHICS_API_OPENGL_33
@@ -6,9 +6,9 @@
 #include <string>
 
 #include "GLFW/glfw3.h"  // Note: Provided with Raylib but needs to be in GLFW folder to work correctly
-#include "external/imgui_glfw_opengl3_impl/imgui.h"
-#include "external/imgui_glfw_opengl3_impl/imgui_impl_glfw.h"
-#include "external/imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
+#include "imgui_glfw_opengl3_impl/imgui.h"
+#include "imgui_glfw_opengl3_impl/imgui_impl_glfw.h"
+#include "imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
 #include "rlgl.h"
 
 SimulatorView::SimulatorView(std::shared_ptr<Simulator> simPtr, int width, int height) : mScreenHeight(height), mScreenWidth(width), mSimulator(simPtr) {
