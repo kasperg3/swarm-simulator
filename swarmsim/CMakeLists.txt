@@ -53,7 +53,7 @@ add_library(${PROJECT_NAME} OBJECT)
 
 target_sources(${PROJECT_NAME} 
     PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/application/Application.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/application/SwarmSim.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Robot.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Simulator.cpp
@@ -64,6 +64,7 @@ target_sources(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/application/        # TODO make sure to only expose files that are intended for the user 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/sim/
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/external
     ${CMAKE_CURRENT_SOURCE_DIR}/include

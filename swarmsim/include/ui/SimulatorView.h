@@ -20,6 +20,7 @@ class SimulatorView {
    private:
     void drawUI();
     void drawSimulationView();
+    void drawRobot();
 
     PropertyPanel mPropertyPanel;
     Camera3D mCamera;

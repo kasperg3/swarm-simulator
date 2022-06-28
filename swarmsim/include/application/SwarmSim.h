@@ -1,5 +1,5 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef SWARMSIM_H
+#define SWARMSIM_H
 
 #pragma once
 #include <memory>
@@ -9,11 +9,11 @@
 #include "../sim/Simulator.h"
 #include "../ui/SimulatorView.h"
 
-class Application {
+class SwarmSim {
    public:
-    Application();
-    Application(bool);
-    ~Application();
+    SwarmSim();
+    SwarmSim(bool);
+    ~SwarmSim();
 
     bool shouldClose();
     void loop();
@@ -24,4 +24,4 @@ class Application {
     std::shared_ptr<Simulator> mSimulator;
 };
 
-#endif
+#endif  // SWARMSIM_H

@@ -1,14 +1,10 @@
-#include "Application.h"
+#include "SwarmSim.h"
 
 #define GRAPHICS_API_OPENGL_33
 #include <iostream>
 #include <string>
 
-Application::Application() {
-    Application(false);
-}
-
-Application::Application(bool headless) : mHeadless(headless) {
+SwarmSim::SwarmSim(bool hl) : mHeadless(hl) {
     // init logger
     Log log;
     log.Init();
@@ -22,14 +18,14 @@ Application::Application(bool headless) : mHeadless(headless) {
     }
 }
 
-Application::~Application() {
+SwarmSim::~SwarmSim() {
 }
 
-bool Application::shouldClose() {
+bool SwarmSim::shouldClose() {
     return mHeadless ? false : WindowShouldClose();
 }
 
-void Application::loop() {
+void SwarmSim::loop() {
     while (!shouldClose()) {
         // step simulator
         mSimulator->step();

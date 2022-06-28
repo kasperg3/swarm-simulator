@@ -9,6 +9,7 @@
 #include "imgui_glfw_opengl3_impl/imgui.h"
 #include "imgui_glfw_opengl3_impl/imgui_impl_glfw.h"
 #include "imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
+#include "raymath.h"
 #include "rlgl.h"
 
 SimulatorView::SimulatorView(std::shared_ptr<Simulator> simPtr, int width, int height) : mScreenHeight(height), mScreenWidth(width), mSimulator(simPtr) {
@@ -90,10 +91,49 @@ void SimulatorView::drawSimulationView() {
     for (auto &&r : mSimulator->getState()->mRobots) {
         auto pos = r.getPosition();
         Vector3 rlPos = {(float)pos.x, (float)pos.y, (float)pos.z};
+
+        // TODO draw a triangle instead
+        auto direction = glm::normalize(r.getVelocity());
+        drawRobot();
         DrawCube(rlPos, 0.5f, .5f, .5f, RED);
         DrawCubeWires(rlPos, 0.5f, 0.5f, 0.5f, MAROON);
+
+        // TODO rotate the object
+
         // DrawCircle3D(rlPos, r.getAttributes().radiusToNeighbour, {1, 0, 0}, -90, LIGHTGRAY);
     }
 
     EndMode3D();
+}
+
+void SimulatorView::drawRobot() {
+    float width = 1;
+    float height = 1;
+    float angle = DEG2RAD * 30.0f;
+    Vector3 point1 = (Vector3){0.0f, 0.0f, 0.0f};
+    Vector3 point2 = (Vector3){sin(angle) * width, cos(angle) * width, 0.0};
+    Vector3 point3 = (Vector3){width, 0.f, 0.0f};
+
+    Vector3 point4 = (Vector3){width / 2, 0.5f * width * height * sin(90.0f * DEG2RAD)};
+
+    // Front face
+    DrawTriangle3D(point1, point2, point3, GREEN);
+    DrawTriangle3D(point1, point2, point4, GREEN);
+    DrawTriangle3D(point4, point2, point1, GREEN);
+    DrawTriangle3D(point3, point2, point1, GREEN);
+
+    // // Back face
+    // DrawTriangle3D(back3, back2, back1, BLACK);
+
+    // // Slanted side
+    // DrawTriangle3D(back1, point1, back3, BLACK);
+    // DrawTriangle3D(point1, point3, back3, BLACK);
+
+    // // Back side
+    // DrawTriangle3D(point2, back2, back3, BLACK);
+    // DrawTriangle3D(back3, point3, point2, BLACK);
+
+    // Bottom side
+    // DrawTriangle3D(back1, back2, point2, BLACK);
+    // DrawTriangle3D(point2, point1, back1, BLACK);
 }
