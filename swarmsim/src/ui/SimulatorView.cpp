@@ -11,9 +11,10 @@
 #include "imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
 #include "raymath.h"
 #include "rlgl.h"
-
+namespace SwarmSim {
 SimulatorView::SimulatorView(std::shared_ptr<Simulator> simPtr, int width, int height) : mScreenHeight(height), mScreenWidth(width), mSimulator(simPtr) {
     // raylib init
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);  // Window configuration flags
     InitWindow(mScreenWidth, mScreenHeight, std::string("swarm sim").c_str());
 
     // imgui init
@@ -89,11 +90,11 @@ void SimulatorView::drawSimulationView() {
     BeginMode3D(mCamera);
     DrawGrid(50, 1.0f);
     for (auto &&r : mSimulator->getState()->mRobots) {
-        auto pos = r.getPosition();
+        auto pos = r->getPosition();
         Vector3 rlPos = {(float)pos.x, (float)pos.y, (float)pos.z};
 
         // TODO draw a triangle instead
-        auto direction = glm::normalize(r.getVelocity());
+        auto direction = glm::normalize(r->getVelocity());
         drawRobot();
         DrawCube(rlPos, 0.5f, .5f, .5f, RED);
         DrawCubeWires(rlPos, 0.5f, 0.5f, 0.5f, MAROON);
@@ -137,3 +138,5 @@ void SimulatorView::drawRobot() {
     // DrawTriangle3D(back1, back2, point2, BLACK);
     // DrawTriangle3D(point2, point1, back1, BLACK);
 }
+
+}  // namespace SwarmSim

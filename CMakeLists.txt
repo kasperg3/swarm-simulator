@@ -8,4 +8,6 @@ set(PROJECT_NAME simulator)
 
 add_subdirectory(swarmsim)
 
+add_subdirectory(sar-coverage-planner)
+
 add_subdirectory(app)

@@ -8,6 +8,7 @@
 #include "../sim/Simulator.h"
 #include "PropertyPanel.h"
 #include "raylib.h"
+namespace SwarmSim {
 
 class SimulatorView {
    public:
@@ -30,5 +31,6 @@ class SimulatorView {
     int mScreenWidth;
     int mScreenHeight;
 };
+}  // namespace SwarmSim
 
 #endif

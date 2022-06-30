@@ -3,7 +3,7 @@
 #include "imgui_glfw_opengl3_impl/imgui.h"
 #include "imgui_glfw_opengl3_impl/imgui_impl_glfw.h"
 #include "imgui_glfw_opengl3_impl/imgui_impl_opengl3.h"
-
+namespace SwarmSim {
 PropertyPanel::PropertyPanel() : mRestart(false) {
 }
 
@@ -23,3 +23,5 @@ void PropertyPanel::draw(SimulatorState* state) {
 
     // TODO create a trace following the robot in x timesteps
 }
+
+}  // namespace SwarmSim

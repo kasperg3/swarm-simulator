@@ -2,7 +2,7 @@ cmake_minimum_required( VERSION 3.12...3.13 )
 
 project( SwarmSim
          VERSION 1.0.0
-         DESCRIPTION "The internal math-libraries." )
+         DESCRIPTION "Simple multi robot simulator" )
 
 
 # Libraries 
@@ -53,9 +53,10 @@ add_library(${PROJECT_NAME} OBJECT)
 
 target_sources(${PROJECT_NAME} 
     PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/application/SwarmSim.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/application/SwarmSimulator.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Robot.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Boids.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Simulator.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/SimulatorState.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/PropertyPanel.cpp

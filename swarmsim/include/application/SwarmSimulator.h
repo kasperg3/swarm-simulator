@@ -9,12 +9,15 @@
 #include "../sim/Simulator.h"
 #include "../ui/SimulatorView.h"
 
-class SwarmSim {
+namespace SwarmSim {
+class SwarmSimulator {  // TODO(kasper) rename to Simulator
    public:
-    SwarmSim();
-    SwarmSim(bool);
-    ~SwarmSim();
+    SwarmSimulator();
+    SwarmSimulator(bool);
+    SwarmSimulator(bool, std::list<Robot*> robots);
+    ~SwarmSimulator();
 
+    void addRobot(Robot* robot);
     bool shouldClose();
     void loop();
 
@@ -23,5 +26,7 @@ class SwarmSim {
     std::unique_ptr<SimulatorView> mSimulatorView;
     std::shared_ptr<Simulator> mSimulator;
 };
+
+}  // namespace SwarmSim
 
 #endif  // SWARMSIM_H

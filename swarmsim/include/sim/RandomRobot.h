@@ -2,15 +2,15 @@
 #define RANDOMROBOT_H
 
 #pragma once
-
-class RandomRobot
-{
-public:
+namespace SwarmSim {
+class RandomRobot {
+   public:
     RandomRobot();
     ~RandomRobot();
 
-private:
-
+   private:
 };
+
+}  // namespace SwarmSim
 
 #endif

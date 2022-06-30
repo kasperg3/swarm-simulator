@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "../sim/Simulator.h"
+namespace SwarmSim {
 class PropertyPanel {
    public:
     PropertyPanel();
@@ -21,4 +22,6 @@ class PropertyPanel {
     float mRadiusToNeighbour = 5;
     glm::dvec3 mTarget;
 };
+
+}  // namespace SwarmSim
 #endif  // __PROPERTYPANEL_H__

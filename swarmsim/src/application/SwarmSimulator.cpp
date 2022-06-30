@@ -1,16 +1,22 @@
-#include "SwarmSim.h"
+#include "SwarmSimulator.h"
 
 #define GRAPHICS_API_OPENGL_33
 #include <iostream>
 #include <string>
 
-SwarmSim::SwarmSim(bool hl) : mHeadless(hl) {
+#include "Boids.h"
+namespace SwarmSim {
+SwarmSimulator::SwarmSimulator(bool hl) {
+    SwarmSimulator(hl, std::list<Robot*>());
+}
+
+SwarmSimulator::SwarmSimulator(bool hl, std::list<Robot*> robots) : mHeadless(hl) {
     // init logger
     Log log;
     log.Init();
 
     // init simulation
-    mSimulator = std::make_shared<Simulator>();
+    mSimulator = std::make_shared<Simulator>(robots);
 
     if (!mHeadless) {
         // init the view
@@ -18,16 +24,19 @@ SwarmSim::SwarmSim(bool hl) : mHeadless(hl) {
     }
 }
 
-SwarmSim::~SwarmSim() {
+SwarmSimulator::~SwarmSimulator() {
 }
 
-bool SwarmSim::shouldClose() {
+void SwarmSimulator::addRobot(Robot* robot) {
+}
+
+bool SwarmSimulator::shouldClose() {
     return mHeadless ? false : WindowShouldClose();
 }
 
-void SwarmSim::loop() {
+void SwarmSimulator::loop() {
     while (!shouldClose()) {
-        // step simulator
+        // step SwarmSimulator
         mSimulator->step();
         if (!mHeadless) {
             // handle input
@@ -37,3 +46,5 @@ void SwarmSim::loop() {
         }
     }
 }
+
+}  // namespace SwarmSim

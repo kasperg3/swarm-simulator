@@ -1,11 +1,9 @@
 #include "RandomRobot.h"
-
-RandomRobot::RandomRobot()
-{
-
+namespace SwarmSim {
+RandomRobot::RandomRobot() {
 }
 
-RandomRobot::~RandomRobot()
-{
-
+RandomRobot::~RandomRobot() {
 }
+
+}  // namespace SwarmSim

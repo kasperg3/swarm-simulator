@@ -10,17 +10,19 @@
 #define BOUNDING_RADIUS 50.0
 
 #include "Robot.h"
+namespace SwarmSim {
 class SimulatorState {
    public:
     SimulatorState();
-    SimulatorState(std::list<Robot>);
+    SimulatorState(std::list<Robot*>);
     ~SimulatorState();
 
-    std::list<Robot>* getRobots() { return &mRobots; }
+    std::list<Robot*>* getRobots() { return &mRobots; }
 
-    std::list<Robot> mRobots;  // TODO make this private
+    std::list<Robot*> mRobots;  // TODO make this private
    private:
     // Todo add more states, like environment states
 };
+}  // namespace SwarmSim
 
 #endif

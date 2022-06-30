@@ -1,12 +1,9 @@
 #include "sim/Simulator.h"
 
+#include "Boids.h"
 #include "core/Log.h"
-Simulator::Simulator() {
-    std::list<Robot> robots;
-    for (size_t i = 0; i < 100; i++) {
-        robots.emplace_back(Robot(i));
-    }
-
+namespace SwarmSim {
+Simulator::Simulator(std::list<Robot*> robots) {
     mState = std::make_shared<SimulatorState>(robots);
 }
 
@@ -14,9 +11,9 @@ Simulator::~Simulator() {}
 
 void Simulator::step() {
     // act once with every agent
-    for (std::list<Robot>::iterator it = mState->mRobots.begin(); it != mState->mRobots.end(); ++it) {
-        it->sense(getState());
-        it->act();
+    for (std::list<Robot*>::iterator it = mState->mRobots.begin(); it != mState->mRobots.end(); ++it) {
+        (*it)->sense(getState());
+        (*it)->act();
     }
 }
 
@@ -27,16 +24,15 @@ void Simulator::step(int steps) {
 }
 
 void Simulator::restart() {
-    HERD_CORE_INFO("Restarting simulation...");
-    // Reinitialize robots
-    std::list<Robot> robots;
-    for (size_t i = 0; i < 100; i++) {
-        robots.emplace_back(Robot(i));
-    }
+    SWARMSIM_CORE_INFO("Restarting simulation... TODO");
+}
 
-    mState = std::make_shared<SimulatorState>(robots);
+void Simulator::addRobot(Robot* robot) {
+    this->mState->mRobots.emplace_back(robot);
 }
 
 SimulatorState* Simulator::getState() {
     return mState.get();
 }
+
+}  // namespace SwarmSim
