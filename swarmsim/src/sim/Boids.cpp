@@ -1,14 +1,15 @@
-#include "sim/Boids.h"
+#include "Boids.h"
 
 #include <math.h>
 
 #include <cstdlib>
 #include <iostream>
 
+#include "SimulatorState.h"
 #include "glm/glm.hpp"
 #include "raylib.h"
-#include "sim/SimulatorState.h"
 #include "time.h"
+
 namespace SwarmSim {
 Boids::Boids() {
     mAttributes = {
@@ -18,7 +19,7 @@ Boids::Boids() {
     };
 }
 
-void Boids::sense(std::shared_ptr<SimulatorState> state) {
+void Boids::sense(std::shared_ptr<SwarmSim::SimulatorState> state) {
     glm::dvec3 allignment(0.0, 0.0, 0.0);
     glm::dvec3 flockCenter = getPosition();
     glm::dvec3 separation(0.0, 0.0, 0.0);

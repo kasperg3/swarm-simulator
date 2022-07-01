@@ -9,7 +9,11 @@ class Widget {
     virtual void draw() = 0;
     virtual void update(std::shared_ptr<SimulatorState>) = 0;
 
-   private:
+   protected:
+    void dragFloat(const char *name, float *value, float steps, float min, float max);
+    void begin(const char *widgetName);
+    void end();
+    bool button(const char *);
 };
 }  // namespace SwarmSim
 

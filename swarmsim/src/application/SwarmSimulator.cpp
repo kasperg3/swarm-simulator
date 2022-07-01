@@ -4,13 +4,9 @@
 #include <iostream>
 #include <string>
 
-#include "Boids.h"
 namespace SwarmSim {
-SwarmSimulator::SwarmSimulator(bool hl) {
-    SwarmSimulator(hl, std::list<Robot*>());
-}
 
-SwarmSimulator::SwarmSimulator(bool hl, std::list<Robot*> robots) : mHeadless(hl) {
+SwarmSimulator::SwarmSimulator(bool hl, std::list<Robot*> robots, std::list<Widget*> widgetList) : mHeadless(hl) {
     // init logger
     Log log;
     log.Init();
@@ -20,7 +16,7 @@ SwarmSimulator::SwarmSimulator(bool hl, std::list<Robot*> robots) : mHeadless(hl
 
     if (!mHeadless) {
         // init the view
-        mSimulatorView = std::make_unique<SimulatorView>(mSimulator, 1000, 720);
+        mSimulatorView = std::make_unique<SimulatorView>(mSimulator, widgetList, 1000, 720);
     }
 }
 

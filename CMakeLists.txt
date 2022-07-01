@@ -10,4 +10,4 @@ add_subdirectory(swarmsim)
 
 add_subdirectory(sar-coverage-planner)
 
-add_subdirectory(app)
+add_subdirectory(example)

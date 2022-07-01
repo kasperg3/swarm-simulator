@@ -12,7 +12,7 @@
 #include "raymath.h"
 #include "rlgl.h"
 namespace SwarmSim {
-SimulatorView::SimulatorView(std::shared_ptr<Simulator> simPtr, int width, int height) : mScreenHeight(height), mScreenWidth(width), mSimulator(simPtr) {
+SimulatorView::SimulatorView(std::shared_ptr<Simulator> simPtr, std::list<Widget *> w, int width, int height) : mScreenHeight(height), mScreenWidth(width), mSimulator(simPtr) {
     // raylib init
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);  // Window configuration flags
     InitWindow(mScreenWidth, mScreenHeight, std::string("swarm sim").c_str());
@@ -33,7 +33,8 @@ SimulatorView::SimulatorView(std::shared_ptr<Simulator> simPtr, int width, int h
 
     SetCameraMode(mCamera, CAMERA_FREE);
 
-    mPropertyPanel = PropertyPanel();
+    // set the widgets
+    mWidgets = w;
 }
 
 SimulatorView::~SimulatorView() {
@@ -62,18 +63,20 @@ void SimulatorView::update() {
     // TODO make the SimulatorView a builder so that:
     // SimulatorView.builder().camera(Enum(cameraType)).widgets(List<Widget>).drawFPS().background(Enum(Color))..build()
     UpdateCamera(&mCamera);  // Update camera
-    if (mPropertyPanel.getRestart()) {
-        mSimulator->getState()->reset();
-        mPropertyPanel.setRestart(false);
+
+    for (auto w : mWidgets) {
+        w->update(mSimulator->getState());
     }
-    mPropertyPanel.update(mSimulator->getState());
 }
 
 void SimulatorView::drawUI() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-    mPropertyPanel.draw();
+
+    for (auto w : mWidgets) {
+        w->draw();
+    }
 
     rlDrawRenderBatchActive();
     ImGui::Render();

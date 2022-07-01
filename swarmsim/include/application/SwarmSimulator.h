@@ -12,9 +12,7 @@
 namespace SwarmSim {
 class SwarmSimulator {
    public:
-    SwarmSimulator();
-    SwarmSimulator(bool);
-    SwarmSimulator(bool, std::list<Robot*> robots);
+    SwarmSimulator(bool, std::list<Robot*> robots, std::list<Widget*>);
     ~SwarmSimulator();
 
     void addRobot(Robot* robot);

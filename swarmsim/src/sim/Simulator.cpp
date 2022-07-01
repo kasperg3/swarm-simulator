@@ -1,6 +1,5 @@
 #include "sim/Simulator.h"
 
-#include "Boids.h"
 #include "core/Log.h"
 namespace SwarmSim {
 
