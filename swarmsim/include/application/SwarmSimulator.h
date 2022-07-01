@@ -10,7 +10,7 @@
 #include "../ui/SimulatorView.h"
 
 namespace SwarmSim {
-class SwarmSimulator {  // TODO(kasper) rename to Simulator
+class SwarmSimulator {
    public:
     SwarmSimulator();
     SwarmSimulator(bool);

@@ -3,13 +3,14 @@
 #include <memory>
 
 #include "../sim/Simulator.h"
+#include "Widget.h"
 namespace SwarmSim {
-class PropertyPanel {
+class PropertyPanel : public Widget {
    public:
     PropertyPanel();
 
-    void draw(SimulatorState*);
-
+    void draw() override;
+    void update(std::shared_ptr<SimulatorState>) override;
     bool getRestart() const { return mRestart; }
     void setRestart(bool mRestart_) { mRestart = mRestart_; }
 

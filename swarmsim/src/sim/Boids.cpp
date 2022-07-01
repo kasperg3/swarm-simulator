@@ -6,32 +6,26 @@
 #include <iostream>
 
 #include "glm/glm.hpp"
+#include "raylib.h"
 #include "sim/SimulatorState.h"
 #include "time.h"
 namespace SwarmSim {
 Boids::Boids() {
     mAttributes = {
-        // TODO move non robot attributes into simulatorstate
-        0.5,                           // cohesion
-        0.3,                           // separation
-        0.2,                           // allignment
-        0.0,                           // attractor
-        5,                             // neighbourhood
         glm::dvec3(20.0, 20.0, 20.0),  // Attractor target
         glm::dvec3((rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0),
         glm::dvec3((rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0),
     };
 }
 
-void Boids::sense(SimulatorState* state) {
-    std::cout << "sense called" << std::endl;
+void Boids::sense(std::shared_ptr<SimulatorState> state) {
     glm::dvec3 allignment(0.0, 0.0, 0.0);
-    glm::dvec3 flockCenter(0.0, 0.0, 0.0);
+    glm::dvec3 flockCenter = getPosition();
     glm::dvec3 separation(0.0, 0.0, 0.0);
     glm::dvec3 cohesion(0.0, 0.0, 0.0);
     int neighbourCount = 0;
 
-    for (auto&& robot : state->mRobots) {
+    for (auto&& robot : state->getRobots()) {
         if (isNeighbouring(robot)) {
             neighbourCount++;
             allignment += robot->getAttributes().velocity;
@@ -58,19 +52,13 @@ void Boids::sense(SimulatorState* state) {
 
     glm::dvec3 attractor = glm::dvec3(mAttributes.taget - getPosition());
 
-    // TODO move this into act function
-    // Weights
-    double separationWeight = mAttributes.separation;
-    double allignmentWeight = mAttributes.allignment;
-    double cohesionWeight = mAttributes.cohesion;
-    double attractorWeight = mAttributes.attractor;
     // calculate the new position:
     glm::dvec3 newVelocity = getVelocity() +
                              repellant +
                              //  attractorWeight * attractor +
-                             separationWeight * separation +
-                             cohesionWeight * cohesion +
-                             allignmentWeight * allignment;
+                             getSeparationWeight() * separation +
+                             getCohesionWeight() * cohesion +
+                             getAllignmentWeight() * allignment;
 
     glm::dvec3 newPosition = getPosition() + clampMagnitude(newVelocity) * DELTA_TIME;
     setPosition(newPosition);
@@ -81,7 +69,19 @@ void Boids::act() {
     // todo seperate sense/act
 }
 
+bool Boids::isNeighbouring(Robot* robot) {
+    // if the robot is not itself and is within radius
+    return glm::notEqual(getPosition(), robot->getPosition()).b && glm::length(this->getPosition() - robot->getPosition()) < getRadiusToNeighbour();
+}
 Boids::~Boids() {
+}
+
+void Boids::draw() {
+    // Draw the default model
+    Robot::draw();
+    glm::dvec3 pos = getPosition();
+    Vector3 rlPos = {(float)pos.x, (float)pos.y, (float)pos.z};
+    DrawCircle3D(rlPos, getRadiusToNeighbour(), {1, 0, 0}, -90, LIGHTGRAY);
 }
 
 }  // namespace SwarmSim

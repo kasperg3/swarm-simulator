@@ -3,6 +3,12 @@ namespace SwarmSim {
 SimulatorState::~SimulatorState() {
 }
 
+void SimulatorState::reset() {
+    for (auto r : mRobots) {
+        r->reset();
+    }
+}
+
 SimulatorState::SimulatorState() {
 }
 

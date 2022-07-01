@@ -9,13 +9,7 @@
 
 namespace SwarmSim {
 class SimulatorState;  // Forward declaration to avoid circular includes
-// TODO the attributes should be all the static configs, others should be contained in robot
 struct RobotAttributes {
-    float cohesion;
-    float separation;
-    float allignment;
-    float attractor;
-    float radiusToNeighbour;
     glm::dvec3 taget;
     glm::dvec3 position;
     glm::dvec3 velocity;
@@ -24,13 +18,18 @@ class Robot {
    public:
     Robot();
     ~Robot();
-    // TODO this is dirty, make them pure virtual
-    virtual void sense(SimulatorState*){};
-    virtual void act(){};
+    // Simulator logic
+    virtual void sense(std::shared_ptr<SimulatorState>) = 0;
+    virtual void act() = 0;
 
+    // Drawing/rendering
+    virtual void draw();
+
+    // Utility
     glm::dvec3 getPosition();
     glm::dvec3 getVelocity();
     RobotAttributes getAttributes();
+    void reset();
 
    protected:
     void setPosition(glm::dvec3 pos);

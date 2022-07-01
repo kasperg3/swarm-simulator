@@ -17,11 +17,12 @@ class SimulatorState {
     SimulatorState(std::list<Robot*>);
     ~SimulatorState();
 
-    std::list<Robot*>* getRobots() { return &mRobots; }
+    std::list<Robot*> getRobots() { return mRobots; }
 
-    std::list<Robot*> mRobots;  // TODO make this private
+    void reset();
+
    private:
-    // Todo add more states, like environment states
+    std::list<Robot*> mRobots;
 };
 }  // namespace SwarmSim
 

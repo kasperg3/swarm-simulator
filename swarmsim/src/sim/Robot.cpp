@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "glm/glm.hpp"
+#include "raylib.h"
 #include "sim/SimulatorState.h"
 #include "time.h"
 namespace SwarmSim {
@@ -13,6 +14,16 @@ Robot::Robot() {
 }
 
 Robot::~Robot() {
+}
+
+void Robot::draw() {
+    auto pos = getPosition();
+    Vector3 rlPos = {(float)pos.x, (float)pos.y, (float)pos.z};
+
+    // TODO draw a triangle instead
+    auto direction = glm::normalize(getVelocity());
+    DrawCube(rlPos, 0.5f, .5f, .5f, RED);
+    DrawCubeWires(rlPos, 0.5f, 0.5f, 0.5f, MAROON);
 }
 
 glm::dvec3 Robot::getPosition() {
@@ -39,9 +50,9 @@ glm::dvec3 Robot::clampMagnitude(glm::dvec3 vector) {
     return glm::normalize(vector) * std::min(glm::length(vector), MAX_SPEED);
 }
 
-bool Robot::isNeighbouring(Robot* robot) {
-    // if the robot is not itself and is within radius
-    return glm::notEqual(getPosition(), robot->getPosition()).b && glm::length(this->getPosition() - robot->getPosition()) < this->mAttributes.radiusToNeighbour;
+void Robot::reset() {
+    // This is meant to be
+    setPosition(glm::dvec3((rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0));
 }
 
 }  // namespace SwarmSim

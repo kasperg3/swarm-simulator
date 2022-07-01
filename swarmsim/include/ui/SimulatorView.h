@@ -21,7 +21,6 @@ class SimulatorView {
    private:
     void drawUI();
     void drawSimulationView();
-    void drawRobot();
 
     PropertyPanel mPropertyPanel;
     Camera3D mCamera;
@@ -31,6 +30,53 @@ class SimulatorView {
     int mScreenWidth;
     int mScreenHeight;
 };
+
+class SimulatorViewBuilder {
+   private:
+    bool fps = false;
+    Color color;
+    std::shared_ptr<Simulator> simulator;
+    int width = 1000;
+    int height = 720;
+    std::list<Widget*> widgetList;
+
+   public:
+    SimulatorViewBuilder(std::shared_ptr<Simulator> sim) {
+        simulator = sim;
+    }
+
+    SimulatorView* build() {
+        return new SimulatorView(simulator, 1000, 720);
+    };
+
+    // TODO
+    //  SimulatorViewBuilder* camera(Camera c) {came return this; };
+
+    SimulatorViewBuilder* widgets(std::list<Widget*> w) {
+        widgetList = w;
+        return this;
+    };
+
+    SimulatorViewBuilder* drawFPS() {
+        fps = true;
+        return this;
+    };
+    SimulatorViewBuilder* backgroundColor(Color c) {
+        color = c;
+        return this;
+    };
+
+    SimulatorViewBuilder* windowHeight(int h) {
+        height = h;
+        return this;
+    };
+
+    SimulatorViewBuilder* windowWidth(int w) {
+        width = w;
+        return this;
+    };
+};
+
 }  // namespace SwarmSim
 
 #endif
