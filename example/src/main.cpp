@@ -11,8 +11,8 @@ void simulator() {
     }
 
     // Custom property menu
-    SwarmSim::Widget* menu = new SwarmSim::PropertyPanel();
     std::list<SwarmSim::Widget*> widgetList;
+    SwarmSim::Widget* menu = new SwarmSim::PropertyPanel();
     widgetList.push_back(menu);
 
     SwarmSim::SwarmSimulator sim(false, robots, widgetList);

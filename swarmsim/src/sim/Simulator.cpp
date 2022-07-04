@@ -12,10 +12,12 @@ Simulator::~Simulator() {
 
 void Simulator::step() {
     // act once with every agent
-    std::list<Robot*> robots = mState->getRobots();
-    for (std::list<Robot*>::iterator it = robots.begin(); it != robots.end(); ++it) {
-        (*it)->sense(getState());
-        (*it)->act();
+    if (!mState->isPaused()) {
+        std::list<Robot*> robots = mState->getRobots();
+        for (std::list<Robot*>::iterator it = robots.begin(); it != robots.end(); ++it) {
+            (*it)->sense(getState());
+            (*it)->act();
+        }
     }
 }
 

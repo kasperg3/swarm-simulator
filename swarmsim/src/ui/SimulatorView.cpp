@@ -20,6 +20,7 @@ SimulatorView::SimulatorView(std::shared_ptr<Simulator> simPtr, std::list<Widget
     // imgui init
     ImGui::CreateContext();
     ImGui_ImplGlfw_InitForOpenGL(glfwGetCurrentContext(), true);
+
     ImGui_ImplOpenGL3_Init("#version 130");
     SetTargetFPS(60);
 
@@ -59,13 +60,18 @@ void SimulatorView::render() {
 }
 
 void SimulatorView::update() {
-    // TODO create a list of widgets and handle the input handling, drawing and updating
     // TODO make the SimulatorView a builder so that:
     // SimulatorView.builder().camera(Enum(cameraType)).widgets(List<Widget>).drawFPS().background(Enum(Color))..build()
     UpdateCamera(&mCamera);  // Update camera
+    auto state = mSimulator->getState();
 
+    // Handle key inputs
+    if (IsKeyPressed(KEY_SPACE)) {
+        state->setPaused(!state->isPaused());
+    }
+    // Widget inputs
     for (auto w : mWidgets) {
-        w->update(mSimulator->getState());
+        w->update(state);
     }
 }
 
