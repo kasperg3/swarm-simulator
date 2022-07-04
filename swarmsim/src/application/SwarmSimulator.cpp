@@ -16,7 +16,7 @@ SwarmSimulator::SwarmSimulator(bool hl, std::list<Robot*> robots, std::list<Widg
 
     if (!mHeadless) {
         // init the view
-        mSimulatorView = std::make_unique<SimulatorView>(mSimulator, widgetList, 1000, 720);
+        mSimulatorView = std::make_unique<SimulatorView>(mSimulator, widgetList, 1920, 1080);
     }
 }
 

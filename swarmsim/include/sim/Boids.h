@@ -14,27 +14,35 @@ class Boids : public Robot {
     void draw() override;
     bool isNeighbouring(Robot*);
 
-    double getSeparationWeight() const { return separationWeight; }
-    void setSeparationWeight(float separationWeight_) { separationWeight = separationWeight_; }
+    double getSeparationWeight() const { return mSeparationWeight; }
+    void setSeparationWeight(float separationWeight_) { mSeparationWeight = separationWeight_; }
 
-    double getCohesionWeight() const { return cohesionWeight; }
-    void setCohesionWeight(float cohesionWeight_) { cohesionWeight = cohesionWeight_; }
+    double getCohesionWeight() const { return mCohesionWeight; }
+    void setCohesionWeight(float cohesionWeight_) { mCohesionWeight = cohesionWeight_; }
 
-    double getAllignmentWeight() const { return allignmentWeight; }
-    void setAllignmentWeight(float allignmentWeight_) { allignmentWeight = allignmentWeight_; }
+    double getAllignmentWeight() const { return mAllignmentWeight; }
+    void setAllignmentWeight(float allignmentWeight_) { mAllignmentWeight = allignmentWeight_; }
 
-    double getAttractorWeight() const { return attractorWeight; }
-    void setAttractorWeight(float attractorWeight_) { attractorWeight = attractorWeight_; }
+    double getAttractorWeight() const { return mAttractorWeight; }
+    void setAttractorWeight(float attractorWeight_) { mAttractorWeight = attractorWeight_; }
 
-    double getRadiusToNeighbour() const { return radiusToNeighbour; }
-    void setRadiusToNeighbour(float radiusToNeighbour_) { radiusToNeighbour = radiusToNeighbour_; }
+    double getRadiusToNeighbour() const { return mRadiusToNeighbour; }
+    void setRadiusToNeighbour(float radiusToNeighbour_) { mRadiusToNeighbour = radiusToNeighbour_; }
+
+    void reset() override;
 
    private:
-    double cohesionWeight = 0.5f;
-    double separationWeight = 0.3f;
-    double allignmentWeight = 0.2f;
-    double attractorWeight = 0.0f;
-    double radiusToNeighbour = 5.0f;
+    glm::dvec3 mSeparation;
+    glm::dvec3 mCohesion;
+    glm::dvec3 mAllignment;
+    glm::dvec3 mAttractor;
+    glm::dvec3 mRepellant;
+
+    double mCohesionWeight = 0.6f;
+    double mSeparationWeight = 0.8f;
+    double mAllignmentWeight = 0.3f;
+    double mAttractorWeight = 0.0f;
+    double mRadiusToNeighbour = 5.0f;
 };
 }  // namespace SwarmSim
 

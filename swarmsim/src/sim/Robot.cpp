@@ -4,7 +4,10 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <random>
 
+#include "core/Log.h"
+#include "core/Random.h"
 #include "glm/glm.hpp"
 #include "raylib.h"
 #include "sim/SimulatorState.h"
@@ -46,13 +49,8 @@ void Robot::setVelocity(glm::dvec3 vel) {
     mAttributes.velocity = std::move(vel);
 }
 
-glm::dvec3 Robot::clampMagnitude(glm::dvec3 vector) {
-    return glm::normalize(vector) * std::min(glm::length(vector), MAX_SPEED);
-}
-
-void Robot::reset() {
-    // This is meant to be
-    setPosition(glm::dvec3((rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0, (rand() % 200 - 100) / 10.0));
+glm::dvec3 Robot::clampMagnitude(glm::dvec3 vector, double max = 10.0) {
+    return glm::normalize(vector) * std::min(glm::length(vector), max);
 }
 
 }  // namespace SwarmSim

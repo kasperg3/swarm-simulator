@@ -29,6 +29,7 @@ void Simulator::step(int steps) {
 
 void Simulator::restart() {
     SWARMSIM_CORE_INFO("Restarting simulation...");
+
     mState.reset();
 }
 

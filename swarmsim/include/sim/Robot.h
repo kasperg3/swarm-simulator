@@ -29,12 +29,12 @@ class Robot {
     glm::dvec3 getPosition();
     glm::dvec3 getVelocity();
     RobotAttributes getAttributes();
-    void reset();
+    virtual void reset() = 0;
 
    protected:
     void setPosition(glm::dvec3 pos);
     void setVelocity(glm::dvec3 vel);
-    glm::dvec3 clampMagnitude(glm::dvec3 vector);
+    glm::dvec3 clampMagnitude(glm::dvec3 vector, double);
     bool isNeighbouring(Robot*);
     RobotAttributes mAttributes;
 };
