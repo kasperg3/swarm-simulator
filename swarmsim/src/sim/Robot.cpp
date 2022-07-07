@@ -10,7 +10,7 @@
 #include "core/Random.h"
 #include "glm/glm.hpp"
 #include "raylib.h"
-#include "sim/SimulatorState.h"
+#include "sim/EnvironmentState.h"
 #include "time.h"
 namespace SwarmSim {
 Robot::Robot() {

@@ -9,7 +9,7 @@ class Boids : public Robot {
     Boids();
     ~Boids();
 
-    void sense(std::shared_ptr<SimulatorState>) override;
+    void sense(std::shared_ptr<EnvironmentState>) override;
     void act() override;
     void draw() override;
     bool isNeighbouring(Robot*);

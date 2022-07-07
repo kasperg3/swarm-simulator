@@ -19,7 +19,8 @@
                 "${workspaceFolder}/sar-coverage-planner/include/",
                 "${workspaceFolder}/swarmsim/include/ui",
                 "${workspaceFolder}/app/include/boids",
-                "${workspaceFolder}/app/include"
+                "${workspaceFolder}/app/include",
+                "${workspaceFolder}/sar-coverage-planner/external"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

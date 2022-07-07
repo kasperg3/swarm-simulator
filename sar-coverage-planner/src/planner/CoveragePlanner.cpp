@@ -1,46 +1,56 @@
 #include "CoveragePlanner.h"
 
+#include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Partition_traits_2.h>
+#include <CGAL/Polygon_with_holes_2.h>
 #include <CGAL/partition_2.h>
 #include <CGAL/property_map.h>
 
+#include "BCD.h"
+#include "CGALconfig.h"
 #include "Log.h"
-
-typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
-typedef CGAL::Partition_traits_2<K, CGAL::Pointer_property_map<K::Point_2>::type> Partition_traits_2;
-typedef Partition_traits_2::Point_2 Point_2;
-typedef Partition_traits_2::Polygon_2 Polygon_2;  // a polygon of indices
-typedef std::list<Polygon_2> Polygon_list;
-
+#include "decomposition.h"
 namespace MRCP {
+
 CoveragePlanner::CoveragePlanner() {
     MRCP::Log::Init();
 
-    std::vector<K::Point_2> points = {K::Point_2(0, 0), K::Point_2(2, 0), K::Point_2(2, 2), K::Point_2(1, 1), K::Point_2(0, 2)};
-    Partition_traits_2 traits(CGAL::make_property_map(points));
-    Polygon_2 polygon;
-    polygon.push_back(0);
-    polygon.push_back(1);
-    polygon.push_back(2);
-    polygon.push_back(3);
-    polygon.push_back(4);
-    Polygon_list partition_polys;
-    CGAL::y_monotone_partition_2(polygon.vertices_begin(),
-                                 polygon.vertices_end(),
-                                 std::back_inserter(partition_polys),
-                                 traits);
-    for (const Polygon_2& poly : partition_polys) {
-        for (Point_2 p : poly.container()) {
-            MRCP_CORE_INFO("points[{}] = {} {}", p, points[p].x(), points[p].y());
-        }
-        std::cout << std::endl;
+    // create a polygon with three holes
+    Polygon_2 outer_polygon;
+    outer_polygon.push_back(Point_2(0, 0));
+    outer_polygon.push_back(Point_2(9, 0));
+    outer_polygon.push_back(Point_2(6, 8));
+    outer_polygon.push_back(Point_2(5, 3));
+    outer_polygon.push_back(Point_2(2, 8));
+    outer_polygon.push_back(Point_2(0, 8));
+    std::vector<Polygon_2> holes(3);
+    holes[0].push_back(Point_2(6, 2));
+    holes[0].push_back(Point_2(7, 1));
+    holes[0].push_back(Point_2(7, 3));
+    holes[0].push_back(Point_2(6, 3));
+    holes[0].push_back(Point_2(5, 2));
+    holes[1].push_back(Point_2(2, 1));
+    holes[1].push_back(Point_2(3, 1));
+    holes[1].push_back(Point_2(3, 3));
+    holes[1].push_back(Point_2(2, 2));
+    holes[1].push_back(Point_2(1, 2));
+    holes[2].push_back(Point_2(1, 4));
+    holes[2].push_back(Point_2(2, 4));
+    holes[2].push_back(Point_2(2, 5));
+    holes[2].push_back(Point_2(3, 5));
+    holes[2].push_back(Point_2(3, 6));
+    holes[2].push_back(Point_2(1, 6));
+    PolygonWithHoles p(outer_polygon);
+    p.add_hole(holes[0]);
+    p.add_hole(holes[1]);
+    p.add_hole(holes[2]);
+
+    std::vector<Polygon_2> result;
+
+    if (computeBestBCDFromPolygonWithHoles(p, &result)) {
+        MRCP_CORE_INFO("BCD computed {} cells", result.size());
     }
-    assert(CGAL::partition_is_valid_2(polygon.vertices_begin(),
-                                      polygon.vertices_end(),
-                                      partition_polys.begin(),
-                                      partition_polys.end(),
-                                      traits));
 }
 
 CoveragePlanner::~CoveragePlanner() {

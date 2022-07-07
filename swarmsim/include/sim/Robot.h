@@ -8,7 +8,7 @@
 #include "glm/glm.hpp"
 
 namespace SwarmSim {
-class SimulatorState;  // Forward declaration to avoid circular includes
+class EnvironmentState;  // Forward declaration to avoid circular includes
 struct RobotAttributes {
     glm::dvec3 taget;
     glm::dvec3 position;
@@ -19,7 +19,7 @@ class Robot {
     Robot();
     ~Robot();
     // Simulator logic
-    virtual void sense(std::shared_ptr<SimulatorState>) = 0;
+    virtual void sense(std::shared_ptr<EnvironmentState>) = 0;
     virtual void act() = 0;
 
     // Drawing/rendering

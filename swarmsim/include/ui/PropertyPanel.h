@@ -10,7 +10,7 @@ class PropertyPanel : public Widget {
     PropertyPanel();
 
     void draw() override;
-    void update(std::shared_ptr<SimulatorState>) override;
+    void update(std::shared_ptr<EnvironmentState>) override;
 
     bool getRestart() const { return mRestart; }
     void setRestart(bool mRestart_) { mRestart = mRestart_; }

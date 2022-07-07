@@ -1,20 +1,23 @@
-#ifndef SIMULATORSTATE_H
-#define SIMULATORSTATE_H
+#ifndef EnvironmentState_H
+#define EnvironmentState_H
 
 #pragma once
 #include <list>
 
 #define BOUNDING_RADIUS 50.0
 
+#include "Environment.h"
 #include "Robot.h"
 namespace SwarmSim {
-class SimulatorState {
+class EnvironmentState {
    public:
-    SimulatorState();
-    SimulatorState(std::list<Robot*>);
-    ~SimulatorState();
+    EnvironmentState();
+    EnvironmentState(std::list<Robot*>);
+    EnvironmentState(std::list<Robot*>, Environment);
+    ~EnvironmentState();
 
     std::list<Robot*> getRobots() { return mRobots; }
+    std::shared_ptr<Environment> getEnvironment() { return mEnvironment; }
 
     void reset();
 
@@ -24,6 +27,7 @@ class SimulatorState {
    private:
     bool mIsPaused = false;
     std::list<Robot*> mRobots;
+    std::shared_ptr<Environment> mEnvironment;
 };
 }  // namespace SwarmSim
 

@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "SimulatorState.h"
+#include "EnvironmentState.h"
 #include "core/Log.h"
 #include "glm/glm.hpp"
 #include "raylib.h"
@@ -18,7 +18,7 @@ Boids::Boids() {
     reset();
 }
 
-void Boids::sense(std::shared_ptr<SwarmSim::SimulatorState> state) {
+void Boids::sense(std::shared_ptr<SwarmSim::EnvironmentState> state) {
     glm::dvec3 allignment(0.0, 0.0, 0.0);
     glm::dvec3 flockCenter(0.0, 0.0, 0.0);
     glm::dvec3 separation(0.0, 0.0, 0.0);
@@ -32,7 +32,6 @@ void Boids::sense(std::shared_ptr<SwarmSim::SimulatorState> state) {
             separation += robot->getPosition() - getPosition();
         }
     }
-    // SWARMSIM_CORE_INFO("Robot position: {},{},{}, Neighbourcount: {}", getPosition().x, getPosition().y, getPosition().z, neighbourCount);
     if (neighbourCount > 0) {
         // allignment
         allignment *= 1.0 / neighbourCount;
@@ -48,7 +47,7 @@ void Boids::sense(std::shared_ptr<SwarmSim::SimulatorState> state) {
 
     // this only works when the sphere is at 0.0
     // TODO for other locations than centre use this formula: Repel = P0 - ((C + V) / |V|) * R
-    mRepellant = std::abs(glm::length(getPosition())) > BOUNDING_RADIUS ? -getPosition() * 0.1 : glm::dvec3(0.0, 0.0, 0.0);
+    mRepellant = std::abs(glm::length(getPosition())) > BOUNDING_RADIUS ? -getPosition() * 0.01 : glm::dvec3(0.0, 0.0, 0.0);
 
     mAttractor = glm::dvec3(mAttributes.taget - getPosition());
     mSeparation = separation;

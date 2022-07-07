@@ -29,9 +29,12 @@ add_library(${PROJECT_NAME} OBJECT)
 
 target_sources(${PROJECT_NAME} 
     PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Polygon.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/planner/CoveragePlanner.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Log.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core/CGALUtil.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner/decomposition.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner/BCD.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner/WeaklyMonotone.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC

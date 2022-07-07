@@ -23,7 +23,7 @@ void PropertyPanel::draw() {
     end();
 }
 
-void PropertyPanel::update(std::shared_ptr<SwarmSim::SimulatorState> state) {
+void PropertyPanel::update(std::shared_ptr<SwarmSim::EnvironmentState> state) {
     if (getRestart()) {
         state->reset();
         setRestart(false);

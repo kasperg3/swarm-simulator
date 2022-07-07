@@ -39,7 +39,7 @@ void Simulator::addRobot(Robot* robot) {
     // this->mState->getRobots().emplace_back(robot);
 }
 
-std::shared_ptr<SimulatorState> Simulator::getState() {
+std::shared_ptr<EnvironmentState> Simulator::getState() {
     return mState;
 }
 

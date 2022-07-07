@@ -22,6 +22,8 @@ class SimulatorView {
     void drawUI();
     void drawSimulationView();
 
+    void setUIStyle();
+
     Camera3D mCamera;
     std::shared_ptr<Simulator> mSimulator;
     int mScreenWidth;
