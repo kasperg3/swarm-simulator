@@ -24,7 +24,7 @@
 // Choset, Howie. "Coverage of known spaces: The boustrophedon cellular
 // decomposition." Autonomous Robots 9.3 (2000): 247-253.
 // https://www.cs.cmu.edu/~motionplanning/lecture/Chap6-CellDecomp_howie.pdf
-namespace MRCP {
+namespace PolygonCoveragePlanning {
 
 std::vector<Polygon_2> computeBCD(const PolygonWithHoles& polygon_in, const Direction_2& dir);
 void sortPolygon(PolygonWithHoles* pwh);
@@ -44,6 +44,6 @@ bool outOfPWH(const PolygonWithHoles& pwh, const Point_2& p);
 // some area.
 bool cleanupPolygon(Polygon_2* poly);
 
-}  // namespace MRCP
+}  // namespace PolygonCoveragePlanning
 
 #endif  // POLYGON_COVERAGE_GEOMETRY_BCD_H_

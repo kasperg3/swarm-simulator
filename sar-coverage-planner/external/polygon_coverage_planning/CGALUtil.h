@@ -22,7 +22,7 @@
 
 #include "CGALconfig.h"
 
-namespace MRCP {
+namespace PolygonCoveragePlanning {
 
 // Helper to check whether a point is inside or on the boundary of the
 // polygon.
@@ -62,6 +62,6 @@ void sortVertices(PolygonWithHoles* pwh);
 std::vector<Point_2> getHullVertices(const PolygonWithHoles& pwh);
 std::vector<std::vector<Point_2>> getHoleVertices(const PolygonWithHoles& pwh);
 
-}  // namespace MRCP
+}  // namespace PolygonCoveragePlanning
 
-#endif  // POLYGON_COVERAGE_GEOMETRY_CGAL_COMM_H_
+#endif

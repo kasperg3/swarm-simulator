@@ -19,7 +19,7 @@
 
 #include "WeaklyMonotone.h"
 
-namespace MRCP {
+namespace PolygonCoveragePlanning {
 
 bool isWeaklyMonotone(const Polygon_2& in, const Line_2& x_axis) {
     // Find north and south.

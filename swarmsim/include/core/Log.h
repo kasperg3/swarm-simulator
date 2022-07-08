@@ -26,4 +26,5 @@ class Log {
 #define SWARMSIM_CORE_WARN(...) SwarmSim::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define SWARMSIM_CORE_ERROR(...) SwarmSim::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define SWARMSIM_CORE_CRITICAL(...) SwarmSim::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#define SWARMSIM_CORE_DEBUG(...) SwarmSim::Log::GetCoreLogger()->debug(__VA_ARGS__)
 #endif  // SWARMSIM_LOG_H

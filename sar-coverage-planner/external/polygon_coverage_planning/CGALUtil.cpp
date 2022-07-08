@@ -19,7 +19,7 @@
 
 #include "CGALUtil.h"
 
-namespace MRCP {
+namespace PolygonCoveragePlanning {
 
 bool pointInPolygon(const PolygonWithHoles& pwh, const Point_2& p) {
     // Point inside outer boundary.
@@ -191,4 +191,4 @@ std::vector<std::vector<Point_2>> getHoleVertices(const PolygonWithHoles& pwh) {
     return hole_vertices;
 }
 
-}  // namespace MRCP
+}  // namespace PolygonCoveragePlanning

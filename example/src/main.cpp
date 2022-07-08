@@ -6,7 +6,7 @@
 void simulator() {
     // Create robot instances
     std::list<SwarmSim::Robot*> robots;
-    for (size_t i = 0; i < 200; i++) {
+    for (size_t i = 0; i < 250; i++) {
         robots.emplace_back(new SwarmSim::Boids());
     }
 

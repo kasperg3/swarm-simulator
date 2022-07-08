@@ -22,7 +22,7 @@
 
 #include "CGALconfig.h"
 
-namespace MRCP {
+namespace PolygonCoveragePlanning {
 
 // Check whether polygon 'in' is weakly monotone perpendicular to 'x_axis'.
 bool isWeaklyMonotone(const Polygon_2& in, const Line_2& x_axis);

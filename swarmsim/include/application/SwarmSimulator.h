@@ -23,6 +23,8 @@ class SwarmSimulator {
     bool mHeadless;
     std::unique_ptr<SimulatorView> mSimulatorView;
     std::shared_ptr<Simulator> mSimulator;
+
+    void customLog(int msgType, const char* text, va_list args);
 };
 
 }  // namespace SwarmSim

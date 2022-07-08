@@ -22,7 +22,7 @@
 
 #include "CGALconfig.h"
 
-namespace MRCP {
+namespace PolygonCoveragePlanning {
 
 // Get all unique polygon edge directions including opposite directions.
 std::vector<Direction_2> findEdgeDirections(const PolygonWithHoles& pwh);

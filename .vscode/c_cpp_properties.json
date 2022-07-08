@@ -18,8 +18,6 @@
                 "${workspaceFolder}/sar-coverage-planner/include/core",
                 "${workspaceFolder}/sar-coverage-planner/include/",
                 "${workspaceFolder}/swarmsim/include/ui",
-                "${workspaceFolder}/app/include/boids",
-                "${workspaceFolder}/app/include",
                 "${workspaceFolder}/sar-coverage-planner/external"
             ],
             "defines": [],

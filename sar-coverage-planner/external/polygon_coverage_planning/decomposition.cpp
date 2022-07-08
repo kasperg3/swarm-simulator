@@ -22,7 +22,7 @@
 #include "BCD.h"
 #include "WeaklyMonotone.h"
 
-namespace MRCP {
+namespace PolygonCoveragePlanning {
 
 std::vector<Direction_2> findEdgeDirections(const PolygonWithHoles& pwh) {
     // Get all possible polygon directions.
@@ -126,4 +126,4 @@ bool computeBestBCDFromPolygonWithHoles(const PolygonWithHoles& pwh,
         return true;
 }
 
-}  // namespace MRCP
+}  // namespace PolygonCoveragePlanning

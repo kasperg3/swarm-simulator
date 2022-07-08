@@ -7,10 +7,10 @@
 #include <CGAL/partition_2.h>
 #include <CGAL/property_map.h>
 
-#include "BCD.h"
-#include "CGALconfig.h"
+#include "CGALDefinitions.h"
 #include "Log.h"
-#include "decomposition.h"
+#include "polygon_coverage_planning/BCD.h"
+#include "polygon_coverage_planning/decomposition.h"
 namespace MRCP {
 
 CoveragePlanner::CoveragePlanner() {
@@ -48,7 +48,7 @@ CoveragePlanner::CoveragePlanner() {
 
     std::vector<Polygon_2> result;
 
-    if (computeBestBCDFromPolygonWithHoles(p, &result)) {
+    if (PolygonCoveragePlanning::computeBestBCDFromPolygonWithHoles(p, &result)) {
         MRCP_CORE_INFO("BCD computed {} cells", result.size());
     }
 }

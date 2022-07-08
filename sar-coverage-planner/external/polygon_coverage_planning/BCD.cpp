@@ -26,7 +26,7 @@
 #include "CGALUtil.h"
 // #include "polygon_coverage_geometry/cgal_comm.h"
 
-namespace MRCP {
+namespace PolygonCoveragePlanning {
 
 std::vector<Polygon_2> computeBCD(const PolygonWithHoles& polygon_in,
                                   const Direction_2& dir) {
@@ -96,11 +96,11 @@ void processEvent(const PolygonWithHoles& pwh, const VertexConstCirculator& v,
                   std::vector<Point_2>* processed_vertices,
                   std::list<Segment_2>* L, std::list<Polygon_2>* open_polygons,
                   std::vector<Polygon_2>* closed_polygons) {
-    /* ROS_ASSERT(sorted_vertices); */
-    /* ROS_ASSERT(processed_vertices); */
-    /* ROS_ASSERT(L); */
-    /* ROS_ASSERT(open_polygons); */
-    /* ROS_ASSERT(closed_polygons); */
+    assert(closed_polygons);
+    assert(open_polygons);
+    assert(L);
+    assert(processed_vertices);
+    assert(sorted_vertices);
 
     Polygon_2::Traits::Equal_2 eq_2;
 
@@ -126,14 +126,11 @@ void processEvent(const PolygonWithHoles& pwh, const VertexConstCirculator& v,
     if (less_x_2(e_prev.target(), e_prev.source()) &&
         less_x_2(e_next.target(), e_next.source())) {  // OUT
 
-        Point_2 p_on_upper = eq_2(e_lower.source(), e_upper.source())
-                                 ? e_upper.target()
-                                 : e_upper.source();
+        Point_2 p_on_upper = eq_2(e_lower.source(), e_upper.source()) ? e_upper.target() : e_upper.source();
         if (e_lower.supporting_line().has_on_positive_side(p_on_upper))
             std::swap(e_lower, e_upper);
 
         // Determine whether we close one or close two and open one.
-        // TODO(rikba): instead of looking at unbounded side, look at adjacent edge
         // angle
         bool close_one = outOfPWH(pwh, *v + Vector_2(1e-6, 0));
 
@@ -167,27 +164,28 @@ void processEvent(const PolygonWithHoles& pwh, const VertexConstCirculator& v,
         } else {
             // Close two cells, open one.
             // Close lower cell.
-            /* ROS_ASSERT(e_lower_id > 0); */
-            /* ROS_ASSERT(intersections.size() > e_upper_id + 1); */
-            std::list<Polygon_2>::iterator lower_cell =
-                std::next(open_polygons->begin(), lower_cell_id);
+            assert(e_lower_id > 0);
+            assert(intersections.size() > e_upper_id + 1);
+            std::list<Polygon_2>::iterator lower_cell = std::next(open_polygons->begin(), lower_cell_id);
             lower_cell->push_back(intersections[e_lower_id - 1]);
             lower_cell->push_back(intersections[e_lower_id]);
-            if (cleanupPolygon(&*lower_cell)) closed_polygons->push_back(*lower_cell);
+            if (cleanupPolygon(&*lower_cell)) {
+                closed_polygons->push_back(*lower_cell);
+            }
             // Close upper cell.
-            std::list<Polygon_2>::iterator upper_cell =
-                std::next(open_polygons->begin(), upper_cell_id);
+            std::list<Polygon_2>::iterator upper_cell = std::next(open_polygons->begin(), upper_cell_id);
             upper_cell->push_back(intersections[e_upper_id]);
             upper_cell->push_back(intersections[e_upper_id + 1]);
-            if (cleanupPolygon(&*upper_cell)) closed_polygons->push_back(*upper_cell);
+            if (cleanupPolygon(&*upper_cell)) {
+                closed_polygons->push_back(*upper_cell);
+            }
 
             // Delete e_lower and e_upper from list.
             L->erase(e_lower_it);
             L->erase(e_upper_it);
 
             // Open one new cell.
-            std::list<Polygon_2>::iterator new_polygon =
-                open_polygons->insert(lower_cell, Polygon_2());
+            std::list<Polygon_2>::iterator new_polygon = open_polygons->insert(lower_cell, Polygon_2());
             new_polygon->push_back(intersections[e_upper_id + 1]);
             new_polygon->push_back(intersections[e_lower_id - 1]);
 
@@ -205,8 +203,9 @@ void processEvent(const PolygonWithHoles& pwh, const VertexConstCirculator& v,
         Point_2 p_on_lower = eq_2(e_lower.source(), e_upper.source())
                                  ? e_lower.target()
                                  : e_lower.source();
-        if (e_upper.supporting_line().has_on_positive_side(p_on_lower))
+        if (e_upper.supporting_line().has_on_positive_side(p_on_lower)) {
             std::swap(e_lower, e_upper);
+        }
 
         // Determine whether we open one or close one and open two.
         bool open_one = outOfPWH(pwh, *v - Vector_2(1e-6, 0));
@@ -215,7 +214,9 @@ void processEvent(const PolygonWithHoles& pwh, const VertexConstCirculator& v,
         size_t e_LOWER_id = 0;
         bool found_e_lower_id = false;
         for (size_t i = 0; i < intersections.size() - 1; i = i + 2) {
-            if (intersections.empty()) break;
+            if (intersections.empty()) {
+                break;
+            }
             if (open_one) {
                 if (less_y_2(intersections[i], e_lower.source()) &&
                     less_y_2(intersections[i + 1], e_upper.source())) {
@@ -433,4 +434,4 @@ bool outOfPWH(const PolygonWithHoles& pwh, const Point_2& p) {
     return false;
 }
 
-}  // namespace MRCP
+}  // namespace PolygonCoveragePlanning

@@ -31,17 +31,19 @@ target_sources(${PROJECT_NAME}
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/planner/CoveragePlanner.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Log.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/core/CGALUtil.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner/decomposition.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner/BCD.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner/WeaklyMonotone.cpp
-)
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/planner/BoustrophedonCellularDecomposition.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/polygon_coverage_planning/CGALUtil.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/polygon_coverage_planning/decomposition.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/polygon_coverage_planning/BCD.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/polygon_coverage_planning/WeaklyMonotone.cpp
+    )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/planner        # TODO make sure to only expose files that are intended for the user 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/core 
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/external
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/polygon_coverage_planning
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     )
 
