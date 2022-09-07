@@ -69,6 +69,7 @@ emmake make
 
 
 ## Run
+To run the example, execute the following command:
 ```sh
 ./build/example/Experiment
 ```
@@ -76,22 +77,22 @@ emmake make
 # Usage
 For a detailed explanation on usage, please take a look at the [GETTING_STARTED.md](https://github.com/kasperg3/swarm-simulator/blob/main/getting_started.md) file.
 
-## Author
+# Author
 
 👤 **Kasper Rømer Grøntved**
 
-* Website: blog.grontved.dk
+* Website: https://blog.grontved.dk
 * GitHub: [@kasperg3](https://github.com/kasperg3)
 
-## 🤝 Contributing
+# 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/kasperg3/swarm-simulator/issues). You can also take a look at the [contributing guide](https://github.com/kasperg3/swarm-simulator/blob/main/CONTRIBUTING.md).
 
-## Show your support
+# Show your support
 
 Give a ⭐️ if this project helped you!
 
-## 📝 License
+# 📝 License
 
 Copyright © 2022 [Kasper Rømer Grøntved](https://github.com/kasperg3).<br />
 This project is [MIT](https://github.com/kasperg3/swarm-simulator/blob/main/LICENCE) licensed.
