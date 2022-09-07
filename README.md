@@ -7,12 +7,14 @@
   <a href="https://github.com/kefranabg/readme-md-generator/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/kasperg3/swarm-simulator/blob/main/LICENCE" target="_blank">
+  <a href="https://github.com/kasperg3/swarm-simulator/blob/79fbc5c29036169ec56d4c07bd64e2df01b3bf38/LICENCE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/github/license/kasperg3/swarm-simulator" />
   </a>
 </p>
 
- A simple and effecient agent centered swarm simulator.
+![Simple Boids example](https://github.com/[username]/[reponame]/blob/[branch]/assets/BoidsExample.gif.jpg?raw=true)
+
+A simple and effecient agent centered swarm simulator.
 
 ## Install
 

@@ -57,11 +57,9 @@ target_sources(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Robot.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Simulator.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Boids.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/EnvironmentState.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Environment.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/SimulatorView.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/PropertyPanel.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Widget.cpp
 )
 
@@ -69,9 +67,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/application/        # TODO make sure to only expose files that are intended for the user 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/sim/
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/
-    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/core/
     ${CMAKE_CURRENT_SOURCE_DIR}/external
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    PRIVATE
     )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_constexpr)

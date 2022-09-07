@@ -15,7 +15,9 @@
                 "${workspaceFolder}/swarmsim/include/sim",
                 "${workspaceFolder}/swarmsim/external",
                 "${workspaceFolder}/swarmsim/include/ui",
-                "${workspaceFolder}/build/_deps/raylib-build/raylib/include"
+                "${workspaceFolder}/build/_deps/raylib-build/raylib/include",
+                "${workspaceFolder}/build/_deps/spdlog-src/include",
+                "${workspaceFolder}/example/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

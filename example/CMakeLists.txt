@@ -4,6 +4,8 @@ project(Experiment
 DESCRIPTION "experiment")
 
 set(SOURCES 
+    src/Boids.cpp
+    src/PropertyPanel.cpp
     src/main.cpp
 )
 
