@@ -54,6 +54,8 @@ add_library(${PROJECT_NAME} OBJECT)
 target_sources(${PROJECT_NAME} 
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/application/SwarmSimulator.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/application/PropertyPanel.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/application/Boids.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Robot.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/sim/Simulator.cpp
