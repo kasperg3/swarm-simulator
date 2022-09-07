@@ -69,7 +69,8 @@ emmake make
 ./build/example/Experiment
 ```
 
-
+# Usage
+For a detailed explanation on usage, please take a look at the [GETTING_STARTED.md](https://github.com/kasperg3/swarm-simulator/blob/main/getting_started.md) file.
 
 ## Author
 
@@ -90,6 +91,3 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2022 [Kasper Rømer Grøntved](https://github.com/kasperg3).<br />
 This project is [MIT](https://github.com/kasperg3/swarm-simulator/blob/main/LICENCE) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
