@@ -12,7 +12,7 @@
   </a>
 </p>
 
-![Simple Boids example](https://github.com/[username]/[reponame]/blob/[branch]/assets/BoidsExample.gif.jpg?raw=true)
+![Simple Boids example](https://github.com/kasperg3/swarm-simulator/blob/main/assets/BoidsExample.gif)
 
 A simple and effecient agent centered swarm simulator.
 
