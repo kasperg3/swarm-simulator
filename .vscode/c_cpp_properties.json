@@ -14,11 +14,8 @@
                 "${workspaceFolder}/swarmsim/include",
                 "${workspaceFolder}/swarmsim/include/sim",
                 "${workspaceFolder}/swarmsim/external",
-                "${workspaceFolder}/sar-coverage-planner/include/planner",
-                "${workspaceFolder}/sar-coverage-planner/include/core",
-                "${workspaceFolder}/sar-coverage-planner/include/",
                 "${workspaceFolder}/swarmsim/include/ui",
-                "${workspaceFolder}/sar-coverage-planner/external"
+                "${workspaceFolder}/build/_deps/raylib-build/raylib/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
