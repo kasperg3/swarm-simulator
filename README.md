@@ -10,6 +10,10 @@
   <a href="https://github.com/kasperg3/swarm-simulator/blob/79fbc5c29036169ec56d4c07bd64e2df01b3bf38/LICENCE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/github/license/kasperg3/swarm-simulator" />
   </a>
+  <a href=" " target="_blank">
+    <img alt="Build" src="https://github.com/kasperg3/swarm-simulator/actions/workflows/build.yml/badge.svg" />
+  </a>
+  
 </p>
 
 ![Simple Boids example](https://github.com/kasperg3/swarm-simulator/blob/main/assets/BoidsExample.gif)
