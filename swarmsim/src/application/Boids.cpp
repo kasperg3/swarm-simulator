@@ -33,10 +33,17 @@ namespace SwarmSim
         {
             if (isNeighbouring(robot))
             {
-                neighbourCount++;
-                allignment += robot->getVelocity();
-                flockCenter += robot->getPosition();
-                separation += robot->getPosition() - getPosition();
+                // Only consider neighbours that within 0.8PI angle
+                glm::vec3 A = this->getVelocity();
+                glm::vec3 B = robot->getPosition() - this->getPosition();
+                float angle = glm::acos(glm::dot(glm::normalize(A), glm::normalize(B)));
+                if (angle < PI * 0.8)
+                {
+                    neighbourCount++;
+                    allignment += robot->getVelocity();
+                    flockCenter += robot->getPosition();
+                    separation += robot->getPosition() - getPosition();
+                }
             }
         }
         if (neighbourCount > 0)
