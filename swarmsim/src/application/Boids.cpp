@@ -33,17 +33,10 @@ namespace SwarmSim
         {
             if (isNeighbouring(robot))
             {
-                // Only consider neighbours that within 0.8PI angle
-                glm::vec3 A = this->getVelocity();
-                glm::vec3 B = robot->getPosition() - this->getPosition();
-                float angle = glm::acos(glm::dot(glm::normalize(A), glm::normalize(B)));
-                if (angle < PI * 0.8)
-                {
-                    neighbourCount++;
-                    allignment += robot->getVelocity();
-                    flockCenter += robot->getPosition();
-                    separation += robot->getPosition() - getPosition();
-                }
+                neighbourCount++;
+                allignment += robot->getVelocity();
+                flockCenter += robot->getPosition();
+                separation += robot->getPosition() - getPosition();
             }
         }
         if (neighbourCount > 0)
@@ -87,8 +80,21 @@ namespace SwarmSim
 
     bool Boids::isNeighbouring(Robot *robot)
     {
+        bool result = false;
         // if the robot is not itself and is within radius
-        return glm::all(glm::notEqual(getPosition(), robot->getPosition())) && glm::length(this->getPosition() - robot->getPosition()) < getRadiusToNeighbour();
+        if (glm::all(glm::notEqual(getPosition(), robot->getPosition())) &&
+            glm::length(this->getPosition() - robot->getPosition()) < getRadiusToNeighbour())
+        {
+            // Only consider neighbours that within 0.8PI angle
+            glm::vec3 A = this->getVelocity();
+            glm::vec3 B = robot->getPosition() - this->getPosition();
+            float angle = glm::acos(glm::dot(glm::normalize(A), glm::normalize(B)));
+            if (angle < PI * 0.8)
+            {
+                result = true;
+            }
+        }
+        return result;
     }
 
     void Boids::reset()

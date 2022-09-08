@@ -2,7 +2,7 @@
 #include "PropertyPanel.h"
 #include "SwarmSimulator.h"
 
-void simulator()
+int main(void)
 {
     // Create robot instances
     std::list<SwarmSim::Robot *> robots;
@@ -19,11 +19,5 @@ void simulator()
     SwarmSim::SwarmSimulator sim(false, robots, widgetList);
 
     sim.loop();
-}
-
-int main(void)
-{
-    simulator();
-
     return 0;
 }
