@@ -75,7 +75,7 @@ To run the example, execute the following command:
 ```
 
 # Usage
-For a detailed explanation on usage, please take a look at the [GETTING_STARTED.md](https://github.com/kasperg3/swarm-simulator/blob/main/getting_started.md) file.
+For a detailed explanation on usage, please take a look at the [GETTING_STARTED.md](https://github.com/kasperg3/swarm-simulator/blob/main/getting_started.md) file or check out the writeup on my site: https://blog.grontved.dk/blog/swarm-simulator/ 
 
 # Author
 
