@@ -9,24 +9,26 @@
 #include "../sim/Simulator.h"
 #include "../ui/SimulatorView.h"
 
-namespace SwarmSim {
-class SwarmSimulator {
-   public:
-    SwarmSimulator(bool, std::list<Robot*> robots, std::list<Widget*>);
-    ~SwarmSimulator();
+namespace SwarmSim
+{
+    class SwarmSimulator
+    {
+    public:
+        SwarmSimulator(bool, std::list<Robot *> robots, std::list<Widget *>);
+        ~SwarmSimulator();
 
-    void addRobot(Robot* robot);
-    bool shouldClose();
-    void loop();
+        void addRobot(Robot *robot);
+        bool shouldClose();
+        void loop();
 
-   private:
-    bool mHeadless;
-    std::unique_ptr<SimulatorView> mSimulatorView;
-    std::shared_ptr<Simulator> mSimulator;
+    private:
+        bool mHeadless;
+        std::unique_ptr<SimulatorView> mSimulatorView;
+        std::shared_ptr<Simulator> mSimulator;
 
-    void customLog(int msgType, const char* text, va_list args);
-};
+        void customLog(int msgType, const char *text, va_list args);
+    };
 
-}  // namespace SwarmSim
+} // namespace SwarmSim
 
-#endif  // SWARMSIM_H
+#endif // SWARMSIM_H

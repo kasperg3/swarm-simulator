@@ -28,7 +28,7 @@ namespace SwarmSim
         Vector3 rlPos = {(float)pos.x, (float)pos.y, (float)pos.z};
 
         // TODO draw a triangle instead
-        auto direction = glm::normalize(getVelocity());
+        // auto direction = glm::normalize(getVelocity());
         DrawCube(rlPos, 0.5f, .5f, .5f, RED);
         DrawCubeWires(rlPos, 0.5f, 0.5f, 0.5f, MAROON);
     }

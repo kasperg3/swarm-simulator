@@ -81,6 +81,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         raylib
         imgui
         spdlog::spdlog
+        ${CMAKE_DL_LIBS}
         )
 
 
