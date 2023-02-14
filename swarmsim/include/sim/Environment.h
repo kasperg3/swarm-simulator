@@ -10,8 +10,9 @@ namespace SwarmSim
     class Environment
     {
     public:
-        virtual void draw(){
-            // DrawGrid(1000, 1.0f); // Default environment is a simple grid plane
+        virtual void draw()
+        {
+            DrawGrid(1000, 1.0f); // Default environment is a simple grid plane
         };
 
         Environment();

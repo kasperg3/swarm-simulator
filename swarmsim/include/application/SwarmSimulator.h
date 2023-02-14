@@ -15,11 +15,14 @@ namespace SwarmSim
     {
     public:
         SwarmSimulator(bool, std::list<Robot *> robots, std::list<Widget *>);
+        SwarmSimulator(bool hl, std::shared_ptr<EnvironmentState> state, std::list<Widget *> widgetList);
+
         ~SwarmSimulator();
 
         void addRobot(Robot *robot);
         bool shouldClose();
         void loop();
+        void loopOnce();
 
     private:
         bool mHeadless;

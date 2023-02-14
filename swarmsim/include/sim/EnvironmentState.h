@@ -8,27 +8,29 @@
 
 #include "Environment.h"
 #include "Robot.h"
-namespace SwarmSim {
-class EnvironmentState {
-   public:
-    EnvironmentState();
-    EnvironmentState(std::list<Robot*>);
-    EnvironmentState(std::list<Robot*>, Environment);
-    ~EnvironmentState();
+namespace SwarmSim
+{
+    class EnvironmentState
+    {
+    public:
+        EnvironmentState();
+        EnvironmentState(std::list<Robot *>);
+        EnvironmentState(std::list<Robot *>, Environment);
+        ~EnvironmentState();
+        void addRobot(Robot *);
+        std::list<Robot *> getRobots() { return mRobots; }
+        std::shared_ptr<Environment> getEnvironment() { return mEnvironment; }
 
-    std::list<Robot*> getRobots() { return mRobots; }
-    std::shared_ptr<Environment> getEnvironment() { return mEnvironment; }
+        void reset();
 
-    void reset();
+        bool isPaused() { return mIsPaused; }
+        void setPaused(bool p) { mIsPaused = p; }
 
-    bool isPaused() { return mIsPaused; }
-    void setPaused(bool p) { mIsPaused = p; }
-
-   private:
-    bool mIsPaused = false;
-    std::list<Robot*> mRobots;
-    std::shared_ptr<Environment> mEnvironment;
-};
-}  // namespace SwarmSim
+    private:
+        bool mIsPaused = false;
+        std::list<Robot *> mRobots;
+        std::shared_ptr<Environment> mEnvironment;
+    };
+} // namespace SwarmSim
 
 #endif

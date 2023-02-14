@@ -7,14 +7,18 @@
 namespace SwarmSim
 {
 
-    SwarmSimulator::SwarmSimulator(bool hl, std::list<Robot *> robots, std::list<Widget *> widgetList) : mHeadless(hl)
+    SwarmSimulator::SwarmSimulator(bool hl, std::list<Robot *> robots, std::list<Widget *> widgetList) : SwarmSimulator(hl, std::make_shared<EnvironmentState>(robots), widgetList)
+    {
+    }
+
+    SwarmSimulator::SwarmSimulator(bool hl, std::shared_ptr<EnvironmentState> state, std::list<Widget *> widgetList) : mHeadless(hl)
     {
         // init logger
         Log log;
         log.Init();
 
         // init simulation
-        mSimulator = std::make_shared<Simulator>(robots);
+        mSimulator = std::make_shared<Simulator>(state);
 
         if (!mHeadless)
         {
@@ -22,13 +26,13 @@ namespace SwarmSim
             mSimulatorView = std::make_unique<SimulatorView>(mSimulator, widgetList, 1920, 1080);
         }
     }
-
     SwarmSimulator::~SwarmSimulator()
     {
     }
 
     void SwarmSimulator::addRobot(Robot *robot)
     {
+        this->mSimulator->addRobot(robot);
     }
 
     bool SwarmSimulator::shouldClose()
@@ -42,6 +46,7 @@ namespace SwarmSim
         {
             // step SwarmSimulator
             mSimulator->step();
+
             if (!mHeadless)
             {
                 // handle input
@@ -49,6 +54,20 @@ namespace SwarmSim
                 // render state
                 mSimulatorView->render();
             }
+        }
+    }
+
+    void SwarmSimulator::loopOnce()
+    {
+        // step SwarmSimulator
+        mSimulator->step();
+
+        if (!mHeadless)
+        {
+            // handle input
+            mSimulatorView->update();
+            // render state
+            mSimulatorView->render();
         }
     }
 

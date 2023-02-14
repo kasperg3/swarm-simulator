@@ -1,46 +1,58 @@
 #include "sim/Simulator.h"
 
 #include "core/Log.h"
-namespace SwarmSim {
+namespace SwarmSim
+{
 
-Simulator::~Simulator() {
-    // Make sure to delete the robots
-    for (auto r : mState->getRobots()) {
-        delete r;
-    }
-}
-
-void Simulator::step() {
-    // act once with every agent
-    if (!mState->isPaused()) {
-        std::list<Robot*> robots = mState->getRobots();
-        for (std::list<Robot*>::iterator it = robots.begin(); it != robots.end(); ++it) {
-            (*it)->sense(getState());
-            (*it)->act();
+    Simulator::~Simulator()
+    {
+        // Make sure to delete the robots
+        for (auto r : mState->getRobots())
+        {
+            delete r;
         }
     }
-}
 
-void Simulator::step(int steps) {
-    for (int i = steps; i > 0; i--) {
-        step();
+    void Simulator::step()
+    {
+        // act once with every agent
+        if (!mState->isPaused())
+        {
+            std::list<Robot *> robots = mState->getRobots();
+            for (std::list<Robot *>::iterator it = robots.begin(); it != robots.end(); ++it)
+            {
+                // TODO Set the robot state
+                (*it)->sense(getState());
+                (*it)->act();
+            }
+        }
     }
-}
 
-void Simulator::restart() {
-    SWARMSIM_CORE_INFO("Restarting simulation...");
+    void Simulator::step(int steps)
+    {
+        for (int i = steps; i > 0; i--)
+        {
+            step();
+        }
+    }
 
-    mState.reset();
-}
+    void Simulator::restart()
+    {
+        SWARMSIM_CORE_INFO("Restarting simulation...");
 
-void Simulator::addRobot(Robot* robot) {
-    SWARMSIM_CORE_WARN("TODO Implement addRobot function");
-    // TODO
-    // this->mState->getRobots().emplace_back(robot);
-}
+        mState.reset();
+    }
 
-std::shared_ptr<EnvironmentState> Simulator::getState() {
-    return mState;
-}
+    void Simulator::addRobot(Robot *robot)
+    {
+        SWARMSIM_CORE_WARN("TODO Implement addRobot function");
+        // TODO
+        this->mState->getRobots().emplace_back(robot);
+    }
 
-}  // namespace SwarmSim
+    std::shared_ptr<EnvironmentState> Simulator::getState()
+    {
+        return mState;
+    }
+
+} // namespace SwarmSim
