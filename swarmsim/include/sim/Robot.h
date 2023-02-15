@@ -36,8 +36,10 @@ namespace SwarmSim
 
         void setPosition(glm::dvec3 pos);
         void setVelocity(glm::dvec3 vel);
+        std::string getId();
 
     protected:
+        std::string uuid;
         glm::dvec3 clampMagnitude(glm::dvec3 vector, double);
         bool isNeighbouring(Robot *);
         RobotAttributes mAttributes;

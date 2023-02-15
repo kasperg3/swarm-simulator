@@ -5,10 +5,10 @@
 int main(void)
 {
     // Create robot instances
-    std::list<SwarmSim::Robot *> robots;
+    std::map<std::string, SwarmSim::Robot *> robots;
     for (size_t i = 0; i < 250; i++)
     {
-        robots.emplace_back(new SwarmSim::Boids());
+        robots.emplace(std::to_string(i), new SwarmSim::Boids());
     }
 
     // Custom property menu

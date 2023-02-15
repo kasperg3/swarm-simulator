@@ -104,7 +104,7 @@ namespace SwarmSim
 
         mSimulator->getState()->getEnvironment()->draw();
 
-        for (auto &&r : mSimulator->getState()->getRobots())
+        for (auto [key, r] : mSimulator->getState()->getRobots())
         {
             r->draw();
         }

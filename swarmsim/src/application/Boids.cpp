@@ -29,14 +29,15 @@ namespace SwarmSim
         glm::dvec3 separation(0.0, 0.0, 0.0);
         glm::dvec3 cohesion(0.0, 0.0, 0.0);
         int neighbourCount = 0;
+
         for (auto &&robot : state->getRobots())
         {
-            if (isNeighbouring(robot))
+            if (isNeighbouring(robot.second))
             {
                 neighbourCount++;
-                allignment += robot->getVelocity();
-                flockCenter += robot->getPosition();
-                separation += robot->getPosition() - getPosition();
+                allignment += robot.second->getVelocity();
+                flockCenter += robot.second->getPosition();
+                separation += robot.second->getPosition() - getPosition();
             }
         }
         if (neighbourCount > 0)

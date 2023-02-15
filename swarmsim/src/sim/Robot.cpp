@@ -12,6 +12,7 @@
 #include "raylib.h"
 #include "sim/EnvironmentState.h"
 #include "time.h"
+#include "Robot.h"
 namespace SwarmSim
 {
     Robot::Robot()
@@ -58,6 +59,10 @@ namespace SwarmSim
         mAttributes.velocity = std::move(vel);
     }
 
+    std::string Robot::getId()
+    {
+        return uuid;
+    }
     glm::dvec3 Robot::clampMagnitude(glm::dvec3 vector, double max = 10.0)
     {
         return glm::normalize(vector) * std::min(glm::length(vector), max);

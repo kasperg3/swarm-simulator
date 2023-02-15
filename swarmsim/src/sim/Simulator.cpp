@@ -1,6 +1,7 @@
 #include "sim/Simulator.h"
 
 #include "core/Log.h"
+#include "Simulator.h"
 namespace SwarmSim
 {
 
@@ -9,7 +10,7 @@ namespace SwarmSim
         // Make sure to delete the robots
         for (auto r : mState->getRobots())
         {
-            delete r;
+            delete r.second;
         }
     }
 
@@ -18,12 +19,12 @@ namespace SwarmSim
         // act once with every agent
         if (!mState->isPaused())
         {
-            std::list<Robot *> robots = mState->getRobots();
-            for (std::list<Robot *>::iterator it = robots.begin(); it != robots.end(); ++it)
+            std::map<std::string, Robot *> robots = mState->getRobots();
+            for (auto const &[key, val] : robots)
             {
                 // TODO Set the robot state
-                (*it)->sense(getState());
-                (*it)->act();
+                val->sense(getState());
+                val->act();
             }
         }
     }
@@ -45,9 +46,17 @@ namespace SwarmSim
 
     void Simulator::addRobot(Robot *robot)
     {
-        SWARMSIM_CORE_WARN("TODO Implement addRobot function");
-        // TODO
-        this->mState->getRobots().emplace_back(robot);
+        this->mState->addRobot(robot);
+    }
+
+    Robot *Simulator::getRobot(std::string id)
+    {
+        return this->mState->getRobot(id);
+    }
+
+    bool Simulator::hasRobot(std::string id)
+    {
+        return this->mState->hasRobot(id);
     }
 
     std::shared_ptr<EnvironmentState> Simulator::getState()

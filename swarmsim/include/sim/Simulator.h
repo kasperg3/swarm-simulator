@@ -14,13 +14,15 @@ namespace SwarmSim
     class Simulator
     {
     public:
-        Simulator(std::list<Robot *> robots) { mState = std::make_shared<EnvironmentState>(robots); };
+        Simulator(std::map<std::string, Robot *> robots) { mState = std::make_shared<EnvironmentState>(robots); };
         Simulator(std::shared_ptr<EnvironmentState> state) { mState = state; };
         ~Simulator();
         void step();
         void step(int);
         void restart();
         void addRobot(Robot *);
+        Robot *getRobot(std::string id);
+        bool hasRobot(std::string id);
 
         std::shared_ptr<EnvironmentState> getState();
 

@@ -36,7 +36,8 @@ namespace SwarmSim
         }
 
         // TODO this is not the right way. Find a way of updating robot parameters without casting to a type
-        for (Robot *robot : state->getRobots())
+        // for (auto *entry : state->getRobots())
+        for (auto const &[key, robot] : state->getRobots())
         {
             Boids *b = static_cast<Boids *>(robot);
             b->setCohesionWeight(mCohesion);

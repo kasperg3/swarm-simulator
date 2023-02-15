@@ -3,11 +3,11 @@
 #define GRAPHICS_API_OPENGL_33
 #include <iostream>
 #include <string>
-
+#include "uuid/uuid.h"
 namespace SwarmSim
 {
 
-    SwarmSimulator::SwarmSimulator(bool hl, std::list<Robot *> robots, std::list<Widget *> widgetList) : SwarmSimulator(hl, std::make_shared<EnvironmentState>(robots), widgetList)
+    SwarmSimulator::SwarmSimulator(bool hl, std::map<std::string, Robot *> robots, std::list<Widget *> widgetList) : SwarmSimulator(hl, std::make_shared<EnvironmentState>(robots), widgetList)
     {
     }
 
@@ -33,6 +33,11 @@ namespace SwarmSim
     void SwarmSimulator::addRobot(Robot *robot)
     {
         this->mSimulator->addRobot(robot);
+    }
+
+    bool SwarmSimulator::hasRobot(std::string rId)
+    {
+        return this->mSimulator->hasRobot(rId);
     }
 
     bool SwarmSimulator::shouldClose()
@@ -68,6 +73,15 @@ namespace SwarmSim
             mSimulatorView->update();
             // render state
             mSimulatorView->render();
+        }
+    }
+
+    void SwarmSimulator::setRobotPosition(std::string id, glm::dvec3 pos)
+    {
+        auto robotPointer = mSimulator->getState()->getRobot(id);
+        if (robotPointer != nullptr)
+        {
+            robotPointer->setPosition(pos);
         }
     }
 
