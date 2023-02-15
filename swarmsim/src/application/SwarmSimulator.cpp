@@ -78,10 +78,14 @@ namespace SwarmSim
 
     void SwarmSimulator::setRobotPosition(std::string id, glm::dvec3 pos)
     {
-        auto robotPointer = mSimulator->getState()->getRobot(id);
-        if (robotPointer != nullptr)
+
+        if (mSimulator->getState()->hasRobot(id))
         {
-            robotPointer->setPosition(pos);
+            mSimulator->getRobot(id)->setPosition(pos);
+        }
+        else
+        {
+            SWARMSIM_CORE_ERROR("Did not find robot with id: %s", id);
         }
     }
 

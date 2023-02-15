@@ -38,7 +38,7 @@ namespace SwarmSim
         {
             Robot *result = nullptr;
             auto it = mRobots.find(key);
-            if (it == mRobots.end())
+            if (it != mRobots.end())
             {
                 result = it->second;
             }
