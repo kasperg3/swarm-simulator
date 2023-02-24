@@ -94,17 +94,18 @@ namespace SwarmSim
         return mSimulator;
     }
 
-    std::map<std::string, SwarmSim::Robot *> SwarmSimulator::getNeighbors(std::string id, glm::dvec3 position, float radius)
+    std::map<std::string, SwarmSim::Robot *> SwarmSimulator::getNeighbors(std::string id, glm::dvec3 position, float range)
     {
         std::map<std::string, SwarmSim::Robot *> robots = mSimulator->getState()->getRobots();
         std::map<std::string, SwarmSim::Robot *> neighbors;
 
+        // Add robot tp list if neighbors, if within range
         std::copy_if(robots.begin(), robots.end(), std::inserter(neighbors, neighbors.end()),
-                     [&id, &position, &radius](std::pair<std::string, SwarmSim::Robot *> map_robot)
+                     [&id, &position, &range](std::pair<std::string, SwarmSim::Robot *> map_robot)
                      {
                          if (id != std::get<0>(map_robot))
                          {
-                             return glm::length(std::get<1>(map_robot)->getPosition() - position) < radius;
+                             return glm::length(std::get<1>(map_robot)->getPosition() - position) < range;
                          }
                          return false;
                      });
