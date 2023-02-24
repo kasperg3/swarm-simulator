@@ -89,4 +89,9 @@ namespace SwarmSim
         }
     }
 
+    std::shared_ptr<Simulator> SwarmSimulator::getSimulator()
+    {
+        return mSimulator;
+    }
+
 } // namespace SwarmSim

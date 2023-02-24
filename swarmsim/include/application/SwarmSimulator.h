@@ -26,6 +26,8 @@ namespace SwarmSim
         void loopOnce();
         void setRobotPosition(std::string, glm::dvec3);
 
+        std::shared_ptr<Simulator> getSimulator();
+
     private:
         bool mHeadless;
         std::unique_ptr<SimulatorView> mSimulatorView;
