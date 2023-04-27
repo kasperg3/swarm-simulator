@@ -18,7 +18,18 @@ namespace SwarmSim
         Environment();
         ~Environment();
 
+        std::vector<std::vector<glm::dvec2>> scene_;
+        std::vector<int> scene_types_;
+
     private:
+        enum AreaTypes
+        {
+            OUT_OF_BOUNDS,
+            AREA_OF_OPERATION,
+            PLAIN,
+            FOREST,
+            LAKE
+        };
     };
 
 } // namespace SwarmSim
