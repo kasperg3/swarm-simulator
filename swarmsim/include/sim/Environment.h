@@ -3,7 +3,9 @@
 
 #pragma once
 #include <memory>
+#include <vector>
 
+#include "glm/glm.hpp"
 #include "raylib.h"
 namespace SwarmSim
 {
@@ -14,6 +16,8 @@ namespace SwarmSim
         {
             DrawGrid(1000, 1.0f); // Default environment is a simple grid plane
         };
+
+        void drawScene();
 
         Environment();
         ~Environment();
