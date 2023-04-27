@@ -1,13 +1,15 @@
 #include "Environment.h"
 
-namespace SwarmSim {
-Environment::Environment() {
-}
+namespace SwarmSim
+{
+    Environment::Environment()
+    {
+    }
 
-Environment::~Environment() {
-}
+    Environment::~Environment()
+    {
+    }
 
-}  // namespace SwarmSim    void Environment::drawScene()
     void Environment::drawScene()
     {
         size_t poly_id = 0;
@@ -49,3 +51,4 @@ Environment::~Environment() {
         }
     }
 
+} // namespace SwarmSim

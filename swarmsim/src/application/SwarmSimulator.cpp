@@ -99,7 +99,7 @@ namespace SwarmSim
         std::map<std::string, SwarmSim::Robot *> robots = mSimulator->getState()->getRobots();
         std::map<std::string, SwarmSim::Robot *> neighbors;
 
-        // Add robot tp list if neighbors, if within range
+        // Add robot to list of neighbors, if within range
         std::copy_if(robots.begin(), robots.end(), std::inserter(neighbors, neighbors.end()),
                      [&id, &position, &range](std::pair<std::string, SwarmSim::Robot *> map_robot)
                      {
