@@ -26,12 +26,17 @@ namespace SwarmSim
     void Robot::draw()
     {
         auto pos = getPosition();
+        auto head = getHeading();
+        auto headPoint = pos + head * 2.0; // 2 meters long
+
         Vector3 rlPos = {(float)pos.x, (float)pos.y, (float)pos.z};
+        Vector3 rlHead = {(float)headPoint.x, (float)headPoint.y, (float)headPoint.z};
 
         // TODO draw a triangle instead
         // auto direction = glm::normalize(getVelocity());
-        DrawCube(rlPos, 0.5f, .5f, .5f, RED);
+        DrawCube(rlPos, 0.5f, 0.5f, 0.5f, RED);
         DrawCubeWires(rlPos, 0.5f, 0.5f, 0.5f, MAROON);
+        DrawLine3D(rlPos, rlHead, MAROON);
     }
 
     glm::dvec3 Robot::getPosition()
@@ -42,6 +47,11 @@ namespace SwarmSim
     glm::dvec3 Robot::getVelocity()
     {
         return this->mAttributes.velocity;
+    }
+
+    glm::dvec3 Robot::getHeading()
+    {
+        return this->mAttributes.heading;
     }
 
     RobotAttributes Robot::getAttributes()
@@ -57,6 +67,11 @@ namespace SwarmSim
     void Robot::setVelocity(glm::dvec3 vel)
     {
         mAttributes.velocity = std::move(vel);
+    }
+
+    void Robot::setHeading(glm::dvec3 head)
+    {
+        mAttributes.heading = std::move(head);
     }
 
     std::string Robot::getId()

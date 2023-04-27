@@ -15,6 +15,7 @@ namespace SwarmSim
         glm::dvec3 taget;
         glm::dvec3 position;
         glm::dvec3 velocity;
+        glm::dvec3 heading;
     };
     class Robot
     {
@@ -31,11 +32,13 @@ namespace SwarmSim
         // Utility
         glm::dvec3 getPosition();
         glm::dvec3 getVelocity();
+        glm::dvec3 getHeading();
         RobotAttributes getAttributes();
         virtual void reset() = 0;
 
         void setPosition(glm::dvec3 pos);
         void setVelocity(glm::dvec3 vel);
+        void setHeading(glm::dvec3 head);
         std::string getId();
 
     protected:

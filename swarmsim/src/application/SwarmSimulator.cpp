@@ -89,6 +89,19 @@ namespace SwarmSim
         }
     }
 
+    void SwarmSimulator::setRobotHeading(std::string id, glm::dvec3 head)
+    {
+
+        if (mSimulator->getState()->hasRobot(id))
+        {
+            mSimulator->getRobot(id)->setHeading(head);
+        }
+        else
+        {
+            SWARMSIM_CORE_ERROR("Did not find robot with id: %s", id);
+        }
+    }
+
     std::shared_ptr<Simulator> SwarmSimulator::getSimulator()
     {
         return mSimulator;
