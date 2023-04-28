@@ -12,6 +12,11 @@ namespace SwarmSim
 
     void Environment::drawScene()
     {
+
+        // Ground station
+        DrawCube({float(ground_station_position_.x), float(ground_station_position_.y), -1}, 2.0, 2.0, 1.0, GREEN);
+
+        // Polygons
         size_t poly_id = 0;
         Color colour;
 
