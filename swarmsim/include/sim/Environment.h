@@ -26,6 +26,7 @@ namespace SwarmSim
         std::vector<std::vector<glm::dvec2>> scene_;
         std::vector<int> scene_types_;
         glm::dvec2 ground_station_position_;
+        double ground_station_range_;
 
     private:
         enum AreaTypes

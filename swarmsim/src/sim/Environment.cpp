@@ -14,7 +14,7 @@ namespace SwarmSim
     {
 
         // Ground station
-        DrawCube({float(ground_station_position_.x), float(ground_station_position_.y), -1}, 2.0, 2.0, 1.0, GREEN);
+        DrawCube({float(ground_station_position_.x), float(ground_station_position_.y), -1}, 2 * ground_station_range_, 2 * ground_station_range_, 1.0, GREEN);
 
         // Polygons
         size_t poly_id = 0;
@@ -31,7 +31,7 @@ namespace SwarmSim
                 colour = RED;
                 break;
             case PLAIN:
-                colour = YELLOW;
+                colour = ORANGE;
                 break;
             case FOREST:
                 colour = GREEN;
