@@ -28,7 +28,7 @@ namespace SwarmSim
 
         // Define the camera to look into our 3d world
         mCamera = {0};
-        mCamera.position = (Vector3){0.0f, 0.0f, 150.01f}; // Camera position
+        mCamera.position = (Vector3){0.0f, 0.0f, 350.01f}; // Camera position
         mCamera.target = (Vector3){0.0f, 0.0f, 0.0f};      // Camera looking at point
         mCamera.up = (Vector3){0.0f, 1.0f, 0.0f};          // Camera up vector (rotation towards target)
         mCamera.fovy = 45.0f;                              // Camera field-of-view Y
