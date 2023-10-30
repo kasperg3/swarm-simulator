@@ -25,6 +25,10 @@ namespace SwarmSim
         void loop();
         void loopOnce();
         void setRobotPosition(std::string, glm::dvec3);
+        void setRobotHeading(std::string, glm::dvec3);
+
+        std::shared_ptr<Simulator> getSimulator();
+        std::map<std::string, SwarmSim::Robot *> getNeighbors(std::string id, glm::dvec3 position, float range);
 
     private:
         bool mHeadless;

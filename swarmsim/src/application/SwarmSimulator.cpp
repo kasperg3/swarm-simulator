@@ -89,4 +89,41 @@ namespace SwarmSim
         }
     }
 
+    void SwarmSimulator::setRobotHeading(std::string id, glm::dvec3 head)
+    {
+
+        if (mSimulator->getState()->hasRobot(id))
+        {
+            mSimulator->getRobot(id)->setHeading(head);
+        }
+        else
+        {
+            SWARMSIM_CORE_ERROR("Did not find robot with id: %s", id);
+        }
+    }
+
+    std::shared_ptr<Simulator> SwarmSimulator::getSimulator()
+    {
+        return mSimulator;
+    }
+
+    std::map<std::string, SwarmSim::Robot *> SwarmSimulator::getNeighbors(std::string id, glm::dvec3 position, float range)
+    {
+        std::map<std::string, SwarmSim::Robot *> robots = mSimulator->getState()->getRobots();
+        std::map<std::string, SwarmSim::Robot *> neighbors;
+
+        // Add robot to list of neighbors, if within range
+        std::copy_if(robots.begin(), robots.end(), std::inserter(neighbors, neighbors.end()),
+                     [&id, &position, &range](std::pair<std::string, SwarmSim::Robot *> map_robot)
+                     {
+                         if (id != std::get<0>(map_robot))
+                         {
+                             return glm::length(std::get<1>(map_robot)->getPosition() - position) < range;
+                         }
+                         return false;
+                     });
+
+        return neighbors;
+    }
+
 } // namespace SwarmSim
